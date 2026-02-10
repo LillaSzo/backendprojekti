@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Main</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head> 
+    <header th:replace="~{fragments :: header}"></header>
+    <body>
+        <h1>Your decks</h1>
+        
+        <table class="table table-striped">
+            <tr>
+            <th>Name</th>
+            <th>Target Language</th>
+            <th>Translation</th>
+            <th>Word Count</th>
+            </tr>
+            <tr th:each = "deck : ${decks}">
+                <td th:text="${deck.name}"></td>
+                <td th:text="${deck.targetLanguage}"></td>
+                <td th:text="${deck.translationLanguage}"></td>
+                <td th:text="${deck.wordcount}"></td>
+                <td><a href="/addword" class="btn btn-success">Add words</a>
+                <a href="/editdeck" class="btn btn-success">Edit</a>
+                <a href="/practice" class="btn btn-success">Practice</a>
+                <a th:href="@{/delete/{id}(id=${deck.deckid})}" class="btn btn-danger">Delete</a></td>
+            </tr>
+        </table>
+
+        <a href="/create" class="btn btn-success">Create Deck</a>
+
+    </body>
+    <footer th:replace="~{fragments :: footer}"></header>
+</html>

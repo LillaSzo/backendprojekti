@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Fragments</title>
+</head> 
+ <body>
+    <!--header tyyli löytyy täältä-->
+    <div th:fragment="header">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(245, 245, 181)">
+            <div class="container-fluid">
+                <a class="navbar-brand" th:href="@{/main}">WordApp</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
+                        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" th:href="@{/main}"><b>Home</b></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#"><b>Community Decks</b></a>
+                        </li>
+                            <li class="nav-item">
+                            <a class="nav-link" href="#"><b>Dictionary</b></a>
+                        </li>
+                    </ul>
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                        <button class="btn btn-outline-success" type="submit"><b>Search</b></button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!--footer tyyli löytyy täältä-->
+    <div th:fragment="footer">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-bottom" style="background-color: rgb(245, 245, 181);">
+        <div class="container-fluid">
+        <span class="navbar-text">
+        2026 WordApp
+        </span>
+    </div>
+    </nav>
+    </div>
+<!--deck tyyli löytyy täältä -->
+    <div th:fragment="navcard1">
+    <div class="d-flex justify-content-center">
+    <div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+    <h5 class="card-title">Deck Creation</h5>
+    <p class="card-text">Click below to create your own deck of cards.</p>
+    <a href="#" class="btn btn-primary">Create new deck</a>
+    </div>
+    </div>
+    </div>
+    </div>
+</body>
+</html>
