@@ -2,21 +2,22 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
-    <title>Create Deck</title>
+    <title>Edit Deck</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <header th:replace="~{fragments :: header}"></header>
 <body>
-    <h1>Create Deck</h1>
+    <h1>Edit Deck</h1>
     <div class="form-group">
-        <form th:object="${deck}" th:action="@{savedeck}" action="#" method="post">
+        <form th:object="${deck}" th:action="@{/edit/{id}(id=${deck.deckid})}" action="#" method="post">
+            <input type="hidden" th:field="*{deckid}"/>
             <label for="name">Name</label>
             <input type="text" id="name" class="form-control" th:field="*{name}"/></br>
             <label for="targetlanguage">Target language</label>
             <input type="text" id="targetlanguage" class="form-control" th:field="*{targetLanguage}"/></br>
             <label for="translationlanguage">Translation language</label>
             <input type="text" id="translationlanguage" class="form-control" th:field="*{translationLanguage}"/></br>
-			<input type="submit" value="Save" class="btn btn-success"></input>
+			<input type="submit" value="Edit" class="btn btn-success"></input>
         </form>
     </div>
 </body>

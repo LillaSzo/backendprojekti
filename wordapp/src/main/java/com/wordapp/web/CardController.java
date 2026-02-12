@@ -1,5 +1,7 @@
 package com.wordapp.web;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,15 +34,29 @@ public class CardController {
         model.addAttribute("deck", new Deck());
         return "createdeck";
     }
-    @PostMapping("/save")
-    public String saveCard(Deck deck){
+    @PostMapping("/savedeck")
+    public String saveDeck(Deck deck){
         drepository.save(deck);
         return "redirect:/main";
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteDeck(@PathVariable("id") Long deckid, Model model){
+    public String deleteDeck(@PathVariable("id") Long deckid){
         drepository.deleteById(deckid);
+        return "redirect:/main";
+    }
+
+    @GetMapping("/edit/{id}")
+    public String pickEdit(@PathVariable("id") Long deckid, Model model){
+        Deck deck = drepository.findById(deckid)
+                                .orElseThrow(()-> new IllegalArgumentException("Deck not found"));
+        model.addAttribute("deck", deck);
+        return "editdeck";
+    }
+
+    @PostMapping("/edit/{id}")
+    public String editDeck(@PathVariable("id") Long deckid, Deck deck){
+        drepository.save(deck);
         return "redirect:/main";
     }
 }
