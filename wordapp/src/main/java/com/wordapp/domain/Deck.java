@@ -60,7 +60,7 @@ public class Deck {
     }
 
     public int getWordcount() {
-        return wordcount;
+        return cardlist.size();
     }
 
     public void setWordcount(int wordcount) {

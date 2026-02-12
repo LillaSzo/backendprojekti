@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.wordapp.domain.Card;
 import com.wordapp.domain.CardRepository;
 import com.wordapp.domain.Deck;
 import com.wordapp.domain.DeckRepository;
@@ -51,6 +52,7 @@ public class CardController {
         Deck deck = drepository.findById(deckid)
                                 .orElseThrow(()-> new IllegalArgumentException("Deck not found"));
         model.addAttribute("deck", deck);
+        model.addAttribute("cards", deck.getCardlist());
         return "editdeck";
     }
 
@@ -59,4 +61,27 @@ public class CardController {
         drepository.save(deck);
         return "redirect:/main";
     }
+
+    @GetMapping("/deck/{id}/addwords")
+    public String createCard(@PathVariable("id") Long deckid, Model model){
+        Deck deck = drepository.findById(deckid)
+                                .orElseThrow(()-> new IllegalArgumentException("Deck not found"));
+
+        Card card = new Card();
+        card.setDeck(deck);
+
+        model.addAttribute("deck", deck);
+        model.addAttribute("cards", card);
+        return "addwords";
+    }
+
+    @PostMapping("/deck/{id}/addwords")
+    public String saveWords(@PathVariable("id") Long deckid, Card card){
+        Deck deck = drepository.findById(deckid)
+                                .orElseThrow(()-> new IllegalArgumentException("Deck not found"));
+        card.setDeck(deck);
+        crepository.save(card);
+        return "redirect:/main";
+    }
+
 }

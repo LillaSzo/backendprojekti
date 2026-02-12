@@ -7,26 +7,44 @@
 </head>
 <header th:replace="~{fragments :: header}"></header>
 <body>
+    <div class="container"></div>
     <h1>Edit Deck</h1>
         <form class="row g-3" th:object="${deck}" th:action="@{/edit/{id}(id=${deck.deckid})}" action="#" method="post">
             <input type="hidden" th:field="*{deckid}"/>
-             <div class ="col-md-4">
+
+            <div class ="col-sm-3">
             <label for="name"><b>Name</b></label>
-            <input type="text" id="name" class="form-control" th:field="*{name}"/></br>
+            <input type="text" id="name" class="form-control" th:field="*{name}"/>
             </div>
-            <div class ="col-md-4">
+
+            <div class ="col-sm-3">
             <label for="targetlanguage"><b>Target language</b></label>
-            <input type="text" id="targetlanguage" class="form-control" th:field="*{targetLanguage}"/></br>
+            <input type="text" id="targetlanguage" class="form-control" th:field="*{targetLanguage}"/>
             </div>
-            <div class ="col-md-4">
+
+            <div class ="col-sm-3">
             <label for="translationlanguage"><b>Translation language</b></label>
-            <input type="text" id="translationlanguage" class="form-control" th:field="*{translationLanguage}"/></br>
+            <input type="text" id="translationlanguage" class="form-control" th:field="*{translationLanguage}"/>
 			</div>
-            <div class="col-12">
-            <input type="submit" value="Edit" class="btn btn-success"></input>
-            </div>
+            
+            <div class="col-md-4 pb-3">
+            <input type="submit" value="Edit Deck" class="btn btn-success"></input>
+            </div> 
         </form>
-    </div>
+        </div>
+        <table class="table table-striped">
+            <tr>
+                <th>Target Word</th>
+                <th>Translation</th>
+                <th>Sentence</th>
+            </tr>
+            <tr th:each = "card : ${cards}">
+                <td th:text = "${card.targetWord}"></td>
+                <td th:text = "${card.translation}"></td>
+                <td th:text = "${card.sentence}"></td>
+            </tr>
+        </table>
+    
 </body>
 <footer th:replace="~{fragments :: footer}"></footer>
 </html>
