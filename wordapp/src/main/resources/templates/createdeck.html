@@ -10,13 +10,19 @@
     <h1>Create Deck</h1>
     <div class="form-group">
         <form th:object="${deck}" th:action="@{savedeck}" action="#" method="post">
-            <label for="name">Name</label>
+            <div class="col-sm-3">
+            <label for="name"><b> Name</b></label>
             <input type="text" id="name" class="form-control" th:field="*{name}"/></br>
-            <label for="targetlanguage">Target language</label>
+            </div>
+            <div class="col-sm-3">
+            <label for="targetlanguage"><b> Target language</b></label>
             <input type="text" id="targetlanguage" class="form-control" th:field="*{targetLanguage}"/></br>
-            <label for="translationlanguage">Translation language</label>
+            </div>
+            <div class="col-sm-3">
+            <label for="translationlanguage"><b> Translation language</b></label>
             <input type="text" id="translationlanguage" class="form-control" th:field="*{translationLanguage}"/></br>
-			<input type="submit" value="Save" class="btn btn-success"></input>
+			</div>
+            <input type="submit" value="Save" class="btn btn-success"></input>
         </form>
     </div>
 </body>
