@@ -11,9 +11,13 @@ public class Deck {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long deckid;
     @Size(min=2, max=30)
-    private String name;
-    private String targetLanguage;
-    private String translationLanguage;
+    private String name; 
+    @ManyToOne
+    @JoinColumn(name="targetlanguageid")
+    private Language targetLanguage;  
+    @ManyToOne
+    @JoinColumn(name="translationlanguageid")
+    private Language translationLanguage;
     private int wordcount;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "deck")
@@ -22,7 +26,7 @@ public class Deck {
     public Deck() {
     }
 
-    public Deck(String name, String targetLanguage, String translationLanguage, int wordcount) {
+    public Deck(String name, Language targetLanguage, Language translationLanguage, int wordcount) {
         this.name = name;
         this.targetLanguage = targetLanguage;
         this.translationLanguage = translationLanguage;
@@ -45,19 +49,19 @@ public class Deck {
         this.name = name;
     }
 
-    public String getTargetLanguage() {
+    public Language getTargetLanguage() {
         return targetLanguage;
     }
 
-    public void setTargetLanguage(String targetLanguage) {
+    public void setTargetLanguage(Language targetLanguage) {
         this.targetLanguage = targetLanguage;
     }
 
-    public String getTranslationLanguage() {
+    public Language getTranslationLanguage() {
         return translationLanguage;
     }
 
-    public void setTranslationLanguage(String translationLanguage) {
+    public void setTranslationLanguage(Language translationLanguage) {
         this.translationLanguage = translationLanguage;
     }
 

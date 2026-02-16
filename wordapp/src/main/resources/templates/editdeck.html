@@ -15,16 +15,27 @@
             <div class ="col-sm-3">
             <label for="name"><b>Name</b></label>
             <input type="text" id="name" class="form-control" th:field="*{name}"/>
+            <div class="alert alert-warning" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>
             </div>
 
-            <div class ="col-sm-3">
-            <label for="targetlanguage"><b>Target language</b></label>
-            <input type="text" id="targetlanguage" class="form-control" th:field="*{targetLanguage}"/>
+            <div class="col-sm-3">
+            <label for="targetlanguage"><b> Target language</b></label>
+            <select class="form-control" id="targetlanguage" th:field="*{targetLanguage}">
+            <option th:each="language : ${languages}" 
+                th:value="${language.id}" 
+                th:text="${language.name}">
+            </option>
+            </select>
             </div>
-
-            <div class ="col-sm-3">
-            <label for="translationlanguage"><b>Translation language</b></label>
-            <input type="text" id="translationlanguage" class="form-control" th:field="*{translationLanguage}"/>
+            
+            <div class="col-sm-3">
+            <label for="translationlanguage"><b> Translation language</b></label>
+            <select class="form-control" id="translationlanguage"  th:field="*{translationLanguage}">
+            <option th:each="language : ${languages}" 
+                th:value="${language.id}" 
+                th:text="${language.name}">
+            </option>
+            </select>
 			</div>
             
             <div class="col-md-4 pb-3">

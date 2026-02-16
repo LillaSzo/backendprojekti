@@ -11,6 +11,7 @@ import com.wordapp.domain.Card;
 import com.wordapp.domain.CardRepository;
 import com.wordapp.domain.Deck;
 import com.wordapp.domain.DeckRepository;
+import com.wordapp.domain.LanguageRepository;
 
 import jakarta.validation.Valid;
 
@@ -19,10 +20,12 @@ public class CardController {
 
     private CardRepository crepository;
     private DeckRepository drepository;
+    private LanguageRepository lrepository;
 
-    public CardController(CardRepository crepository, DeckRepository drepository){
+    public CardController(CardRepository crepository, DeckRepository drepository, LanguageRepository lrepository){
         this.crepository = crepository;
         this.drepository = drepository;
+        this.lrepository = lrepository;
     }
 
     @GetMapping("/main")
@@ -34,12 +37,14 @@ public class CardController {
     @GetMapping("/create")
     public String createDeck(Model model){
         model.addAttribute("deck", new Deck());
+        model.addAttribute("languages", lrepository.findAll());
         return "createdeck";
     }
     @PostMapping("/create")
-    public String saveDeck(@Valid Deck deck, BindingResult bindingResult){
+    public String saveDeck(@Valid Deck deck, BindingResult bindingResult, Model model){
 
         if(bindingResult.hasErrors()){
+            model.addAttribute("languages", lrepository.findAll());
             return"createdeck";
         }
         drepository.save(deck);
@@ -58,11 +63,17 @@ public class CardController {
                                 .orElseThrow(()-> new IllegalArgumentException("Deck not found"));
         model.addAttribute("deck", deck);
         model.addAttribute("cards", deck.getCardlist());
+        model.addAttribute("languages", lrepository.findAll());
         return "editdeck";
     }
 
     @PostMapping("/edit/{id}")
-    public String editDeck(@PathVariable("id") Long deckid, Deck deck){
+    public String editDeck(@PathVariable("id") Long deckid, @Valid Deck deck, BindingResult bindingresult, Model model){
+        
+        if(bindingresult.hasErrors()){
+            model.addAttribute("languages", lrepository.findAll());
+            return "editdeck";
+        }
         drepository.save(deck);
         return "redirect:/main";
     }
