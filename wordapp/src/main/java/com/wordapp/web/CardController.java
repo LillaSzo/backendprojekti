@@ -1,9 +1,8 @@
 package com.wordapp.web;
 
-import java.util.Optional;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +11,8 @@ import com.wordapp.domain.Card;
 import com.wordapp.domain.CardRepository;
 import com.wordapp.domain.Deck;
 import com.wordapp.domain.DeckRepository;
+
+import jakarta.validation.Valid;
 
 @Controller
 public class CardController {
@@ -35,8 +36,12 @@ public class CardController {
         model.addAttribute("deck", new Deck());
         return "createdeck";
     }
-    @PostMapping("/savedeck")
-    public String saveDeck(Deck deck){
+    @PostMapping("/create")
+    public String saveDeck(@Valid Deck deck, BindingResult bindingResult){
+
+        if(bindingResult.hasErrors()){
+            return"createdeck";
+        }
         drepository.save(deck);
         return "redirect:/main";
     }
@@ -62,23 +67,29 @@ public class CardController {
         return "redirect:/main";
     }
 
-    @GetMapping("/deck/{id}/addwords")
-    public String createCard(@PathVariable("id") Long deckid, Model model){
+    @GetMapping("/deck/{id}/addword")
+    public String createCard(@PathVariable("id") Long deckid, Model model, Card card){
         Deck deck = drepository.findById(deckid)
                                 .orElseThrow(()-> new IllegalArgumentException("Deck not found"));
 
-        Card card = new Card();
         card.setDeck(deck);
 
         model.addAttribute("deck", deck);
-        model.addAttribute("cards", card);
-        return "addwords";
+        model.addAttribute("card", card);
+        return "addword";
     }
 
-    @PostMapping("/deck/{id}/addwords")
-    public String saveWords(@PathVariable("id") Long deckid, Card card){
+    @PostMapping("/deck/{id}/addword")
+    public String saveWords(@PathVariable("id") Long deckid, @Valid Card card, BindingResult bindingResult, Model model){
+
         Deck deck = drepository.findById(deckid)
                                 .orElseThrow(()-> new IllegalArgumentException("Deck not found"));
+
+        if(bindingResult.hasErrors()){
+            model.addAttribute("deck", deck);
+            model.addAttribute("card", card);
+            return "addword";
+        }
         card.setDeck(deck);
         crepository.save(card);
         return "redirect:/main";

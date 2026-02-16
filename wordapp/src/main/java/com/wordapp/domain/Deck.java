@@ -3,12 +3,14 @@ package com.wordapp.domain;
 import java.util.List;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Deck {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long deckid;
+    @Size(min=2, max=30)
     private String name;
     private String targetLanguage;
     private String translationLanguage;

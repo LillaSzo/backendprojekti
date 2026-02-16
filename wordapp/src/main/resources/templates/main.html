@@ -21,14 +21,14 @@
                 <td th:text="${deck.targetLanguage}"></td>
                 <td th:text="${deck.translationLanguage}"></td>
                 <td th:text="${deck.wordcount}"></td>
-                <td><a th:href="@{/deck/{id}/addwords(id=${deck.deckid})}" class="btn btn-success">Add words</a>
+                <td><a th:href="@{/deck/{id}/addword(id=${deck.deckid})}" class="btn btn-success">Add word</a>
                 <a th:href="@{/edit/{id}(id=${deck.deckid})}" class="btn btn-success">Edit</a>
                 <a href="/practice" class="btn btn-success">Practice</a>
                 <a th:href="@{/delete/{id}(id=${deck.deckid})}" class="btn btn-danger">Delete</a></td>
             </tr>
         </table>
 
-        <a href="/create" class="btn btn-success">Create Deck</a>
+        <a th:href="@{/create}" class="btn btn-success">Create Deck</a>
 
     </body>
     <footer th:replace="~{fragments :: footer}"></header>

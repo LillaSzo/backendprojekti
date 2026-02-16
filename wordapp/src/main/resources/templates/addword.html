@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Add word</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head> 
+    <header th:replace="~{fragments :: header}"></header>
+    <body>
+        
+        <h1 >Add words to:<span th:text="${deck.name}"></span> </h1>
+            <form class="row g-3" th:object="${card}" th:action="@{/deck/{id}/addword(id=${deck.deckid})}" method="post">
+                <div class="col-sm-3">
+                <label for="targetword"><b> Target word</b></label>
+                <input type="text" id="targetword" class="form-control" th:field="*{targetWord}"/>
+                <div class="alert alert-warning" th:if="${#fields.hasErrors('targetWord')}" th:errors="*{targetWord}">Error</div>
+                </div>
+                <div class="col-sm-3">
+                <label for="translation"><b> Translation</b></label>
+                <input type="text" id="translation" class="form-control" th:field="*{translation}"/>
+                <div class="alert alert-warning" th:if="${#fields.hasErrors('translation')}" th:errors="*{translation}">Error</div>
+                </div>
+                <div class="col-sm-3">
+                <label for="sentence"><b> Sentence</b></label>
+                <input type="text" id="sentence" class="form-control" th:field="*{sentence}"/></br>
+			    </div>
+                <div class="col-md-4 pb-3">
+                <input type="submit" value="Add word" class="btn btn-success"></input>
+                </div>
+            </form>
+  
+    </body>
+    <footer th:replace="~{fragments :: footer}"></header>
+</html>

@@ -1,13 +1,16 @@
 package com.wordapp.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long cardid;
+    @Size(min=2, max=20)
     private String targetWord;
+    @Size(min=2, max=20)
     private String translation;
     private String sentence;
 
