@@ -2,6 +2,8 @@ package com.wordapp.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
@@ -20,6 +22,7 @@ public class Deck {
     private Language translationLanguage;
     private int wordcount;
 
+    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "deck")
     private List<Card> cardlist;
 

@@ -1,5 +1,7 @@
 package com.wordapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
@@ -14,6 +16,7 @@ public class Card {
     private String translation;
     private String sentence;
 
+    @JsonBackReference
     @ManyToOne
     @JoinColumn(name="deckid")
     private Deck deck;
