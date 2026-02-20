@@ -7,55 +7,65 @@
 </head>
 <header th:replace="~{fragments :: header}"></header>
 <body>
-    <div class="container"></div>
-    <h1>Edit Deck</h1>
-        <form class="row g-3" th:object="${deck}" th:action="@{/edit/{id}(id=${deck.deckid})}" action="#" method="post">
-            <input type="hidden" th:field="*{deckid}"/>
 
-            <div class ="col-sm-3">
-            <label for="name"><b>Name</b></label>
-            <input type="text" id="name" class="form-control" th:field="*{name}"/>
-            <div class="alert alert-warning" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>
-            </div>
+<div class="container mt-5">
 
-            <div class="col-sm-3">
-            <label for="targetlanguage"><b> Target language</b></label>
-            <select class="form-control" id="targetlanguage" th:field="*{targetLanguage}">
-            <option th:each="language : ${languages}" 
-                th:value="${language.id}" 
-                th:text="${language.name}">
-            </option>
-            </select>
-            </div>
+    <form class="row g-4 p-4 shadow rounded-4" th:object="${deck}" th:action="@{/edit/{id}(id=${deck.deckid})}" action="#" method="post">
             
-            <div class="col-sm-3">
-            <label for="translationlanguage"><b> Translation language</b></label>
-            <select class="form-control" id="translationlanguage"  th:field="*{translationLanguage}">
-            <option th:each="language : ${languages}" 
-                th:value="${language.id}" 
-                th:text="${language.name}">
-            </option>
-            </select>
-			</div>
-            
-            <div class="col-md-4 pb-3">
-            <input type="submit" value="Edit Deck" class="btn btn-success"></input>
-            </div> 
-        </form>
+        <input type="hidden" th:field="*{deckid}"/>
+
+        <div class ="col-12 mb-4 text-center"><h3 class="fw-bold">Edit deck</h3></div>
+
+        <div class="col-md-4">
+        <label for="name"><b>Name</b></label>
+        <input type="text" id="name" class="form-control" th:field="*{name}"/>
+        <div class="alert alert-warning" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>
         </div>
-        <table class="table table-striped">
+
+        <div class="col-md-4">
+        <label for="targetlanguage"><b>Target language</b></label>
+        <select class="form-select" id="targetlanguage" th:field="*{targetLanguage}">
+        <option th:each="language : ${languages}" 
+                th:value="${language.id}" 
+                th:text="${language.name}">
+        </option>
+        </select>
+        </div>
+            
+        <div class="col-md-4">
+        <label for="translationlanguage"><b>Translation language</b></label>
+        <select class="form-select" id="translationlanguage"  th:field="*{translationLanguage}">
+        <option th:each="language : ${languages}" 
+                th:value="${language.id}" 
+                th:text="${language.name}">
+        </option>
+        </select>
+		</div>
+            
+        <div class="col-12">
+        <input type="submit" value="Edit Deck" class="btn btn-success"></input>
+        </div>
+
+    </form>
+</div>
+
+<div class="table-responsive mt-4">
+    <table class= "table table-hover align-middle mb-0">
+        <thead class="table-light">
             <tr>
                 <th>Target Word</th>
                 <th>Translation</th>
                 <th>Sentence</th>
             </tr>
+        </thead>
             <tr th:each = "card : ${cards}">
                 <td th:text = "${card.targetWord}"></td>
                 <td th:text = "${card.translation}"></td>
                 <td th:text = "${card.sentence}"></td>
             </tr>
-        </table>
-    
+    </table>
+</div>
 </body>
+
 <footer th:replace="~{fragments :: footer}"></footer>
 </html>

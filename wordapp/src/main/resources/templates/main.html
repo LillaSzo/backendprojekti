@@ -7,28 +7,37 @@
 </head> 
     <header th:replace="~{fragments :: header}"></header>
     <body>
-        <h1>Your decks</h1>
-        
-        <table class="table table-striped">
+    <div class="container mt-5">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Your Decks</h2>
+        <a th:href="@{/create}" class="btn btn-success">+ Create Deck</a>
+        </div>    
+
+        <table class="table table-hover align-middle mb-0" style="box-shadow: 0 4px 8px rgba(0,0,0,0.2)">
+            <thead class="table-light">
             <tr>
             <th>Name</th>
             <th>Target Language</th>
             <th>Translation</th>
             <th>Word Count</th>
+            <th class="text-end">Actions</th>
             </tr>
+            </thead>
+
             <tr th:each = "deck : ${decks}">
                 <td th:text="${deck.name}"></td>
                 <td th:text="${deck.targetLanguage}"></td>
                 <td th:text="${deck.translationLanguage}"></td>
                 <td th:text="${deck.wordcount}"></td>
-                <td><a th:href="@{/deck/{id}/addword(id=${deck.deckid})}" class="btn btn-success">Add word</a>
+                <td class="text-end"><a th:href="@{/deck/{id}/addword(id=${deck.deckid})}" class="btn btn-success">Add word</a>
                 <a th:href="@{/edit/{id}(id=${deck.deckid})}" class="btn btn-success">Edit</a>
                 <a href="/practice" class="btn btn-success">Practice</a>
                 <a th:href="@{/delete/{id}(id=${deck.deckid})}" class="btn btn-danger">Delete</a></td>
             </tr>
         </table>
-
-        <a th:href="@{/create}" class="btn btn-success">Create Deck</a>
+ 
+    </div>
     </body>
     <footer th:replace="~{fragments :: footer}"></header>
 </html>

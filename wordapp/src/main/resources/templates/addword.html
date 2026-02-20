@@ -7,28 +7,35 @@
 </head> 
     <header th:replace="~{fragments :: header}"></header>
     <body>
-        
-        <h1 >Add words to:<span th:text="${deck.name}"></span> </h1>
-            <form class="row g-3" th:object="${card}" th:action="@{/deck/{id}/addword(id=${deck.deckid})}" method="post">
-                <div class="col-sm-3">
-                <label for="targetword"><b> Target word</b></label>
-                <input type="text" id="targetword" class="form-control" th:field="*{targetWord}"/>
+    <div class="container mt-5">    
+
+        <form class="row g-4 p-4 shadow rounded-4" th:object="${card}" th:action="@{/deck/{id}/addword(id=${deck.deckid})}" method="post">
+            
+            <div class="col-12"><h3 class="fw-bold mb-4">Add word to: <span th:text="${deck.name}"></span></h3></div>
+
+                <div class="col-md-6">
+                <label for="targetword"><b>Target word</b></label>
+                <input type="text" id="targetword" class="form-control" th:field="*{targetWord}" placeholder="Write target word"/>
                 <div class="alert alert-warning" th:if="${#fields.hasErrors('targetWord')}" th:errors="*{targetWord}">Error</div>
                 </div>
-                <div class="col-sm-3">
-                <label for="translation"><b> Translation</b></label>
-                <input type="text" id="translation" class="form-control" th:field="*{translation}"/>
+
+                <div class="col-md-6">
+                <label for="translation"><b>Translation</b></label>
+                <input type="text" id="translation" class="form-control" th:field="*{translation}" placeholder="Write translation"/>
                 <div class="alert alert-warning" th:if="${#fields.hasErrors('translation')}" th:errors="*{translation}">Error</div>
                 </div>
-                <div class="col-sm-3">
-                <label for="sentence"><b> Sentence</b></label>
-                <input type="text" id="sentence" class="form-control" th:field="*{sentence}"/></br>
+
+                <div class="col-12">
+                <label for="sentence"><b>Sentence</b></label>
+                <input type="text" id="sentence" class="form-control" th:field="*{sentence}" placeholder="Write example sentence"/></br>
 			    </div>
-                <div class="col-md-4 pb-3">
+
+                <div class="col-12">
                 <input type="submit" value="Add word" class="btn btn-success"></input>
                 </div>
-            </form>
-  
+        </form>
+        
+    </div>
     </body>
     <footer th:replace="~{fragments :: footer}"></header>
 </html>

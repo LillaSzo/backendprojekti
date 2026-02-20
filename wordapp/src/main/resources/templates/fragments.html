@@ -7,7 +7,7 @@
  <body>
     <!--header tyyli löytyy täältä-->
     <div th:fragment="header">
-        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(245, 245, 181)">
+        <nav class="navbar navbar-expand-lg navbar-light shadow-sm" style="background-color: rgb(255, 243, 205)">
             <div class="container-fluid">
                 <a class="navbar-brand" th:href="@{/main}">WordApp</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" 
@@ -34,9 +34,10 @@
             </div>
         </nav>
     </div>
+
     <!--footer tyyli löytyy täältä-->
     <div th:fragment="footer">
-        <nav class="navbar navbar-expand-lg navbar-light fixed-bottom" style="background-color: rgb(245, 245, 181);">
+        <nav class="navbar navbar-expand-lg navbar-light fixed-bottom shadow" style="background-color: rgb(255, 243, 205);">
         <div class="container-fluid">
         <span class="navbar-text">
         2026 WordApp
@@ -44,18 +45,6 @@
     </div>
     </nav>
     </div>
-<!--deck tyyli löytyy täältä jos on tarve tulevaisuudessa -->
-    <div th:fragment="navcard1">
-    <div class="d-flex justify-content-center">
-    <div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-    <h5 class="card-title">Deck Creation</h5>
-    <p class="card-text">Click below to create your own deck of cards.</p>
-    <a href="#" class="btn btn-primary">Create new deck</a>
-    </div>
-    </div>
-    </div>
-    </div>
+
 </body>
 </html>

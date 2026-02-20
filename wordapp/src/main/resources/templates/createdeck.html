@@ -7,36 +7,51 @@
 </head>
 <header th:replace="~{fragments :: header}"></header>
 <body>
-    <h1>Create Deck</h1>
-        <form th:object="${deck}" th:action="@{create}" method="post">
-            <div class="col-sm-2">
-            <label for="name"><b> Name</b></label>
-            <input type="text" id="name" class="form-control" th:field="*{name}"/>
-            <div class="alert alert-warning" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>
-            </div>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
 
-            <div class="col-sm-2">
-            <label for="targetlanguage"><b> Target language</b></label>
-            <select class="form-control" id="targetlanguage" th:field="*{targetLanguage}">
-            <option th:each="language : ${languages}" 
-                th:value="${language.id}" 
-                th:text="${language.name}">
-            </option>
-            </select>
-            </div>
+            <div class="card shadow-lg border-0 rounded-4">
+            <div class="card-body p-4">
+
+                <h4 class="mb-4 text-center fw-bold">Create Deck</h4>
+
+                <form th:object="${deck}" th:action="@{create}" method="post">
+
+                <div class="mb-3">
+                <label for="name"><b>Name</b></label>
+                <input type="text" id="name" class="form-control" th:field="*{name}" placeholder="Enter name"/>
+                <div class="alert alert-warning" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Error</div>
+                </div>
+
+                <div class="mb-3">
+                <label for="targetlanguage"><b>Target language</b></label>
+                <select class="form-select" id="targetlanguage" th:field="*{targetLanguage}">
+                <option th:each="language : ${languages}" 
+                        th:value="${language.id}" 
+                        th:text="${language.name}">
+                </option>
+                </select>
+                </div>
             
-            <div class="col-sm-2">
-            <label for="translationlanguage"><b> Translation language</b></label>
-            <select class="form-control" id="translationlanguage"  th:field="*{translationLanguage}">
-            <option th:each="language : ${languages}" 
+                <div class="mb-3">
+                <label for="translationlanguage"><b>Translation language</b></label>
+                <select class="form-select" id="translationlanguage"  th:field="*{translationLanguage}">
+                <option th:each="language : ${languages}" 
                 th:value="${language.id}" 
                 th:text="${language.name}">
-            </option>
-            </select><br/>
-			</div>
-            <input type="submit" value="Save" class="btn btn-success"></input>
-        </form>
-    
+                </option>
+                </select><br/>
+			    </div>
+
+                <input type="submit" value="Save" class="btn btn-success"></input>
+                
+                </form>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <footer th:replace="~{fragments :: footer}"></footer>
 </html>
