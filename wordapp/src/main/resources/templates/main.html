@@ -32,7 +32,7 @@
                 <td th:text="${deck.wordcount}"></td>
                 <td class="text-end"><a th:href="@{/deck/{id}/addword(id=${deck.deckid})}" class="btn btn-success">Add word</a>
                 <a th:href="@{/edit/{id}(id=${deck.deckid})}" class="btn btn-success">Edit</a>
-                <a href="/practice" class="btn btn-success">Practice</a>
+                <a th:href="@{/practice/deck/{id}(id=${deck.deckid})}" class="btn btn-success">Practice</a>
                 <a th:href="@{/delete/{id}(id=${deck.deckid})}" class="btn btn-danger">Delete</a></td>
             </tr>
         </table>

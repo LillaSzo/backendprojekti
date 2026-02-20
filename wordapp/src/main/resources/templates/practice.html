@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Practice</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head> 
+<header th:replace="~{fragments :: header}"></header>
+<body>
+<div class="container mt-5">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Practice</h2>
+        <a th:href="@{/practice/deck/{id}(id=${deck.deckid}, practice=true)}" class="btn btn-success">Practice</a>
+        </div>    
+
+        <table class="table table-hover align-middle mb-0" style="box-shadow: 0 4px 8px rgba(0,0,0,0.2)">
+        <thead class="table-light">
+            <tr>
+                <th>Target Word</th>
+                <th>Translation</th>
+                <th th:if="${!practice}">Sentence</th>
+            </tr>
+        </thead>
+            <tr th:each = "card : ${cards}">
+                <td th:text = "${card.targetWord}"></td>
+                <td th:if="${!practice}" th:text = "${card.translation}"></td>
+                <td th:if="${practice}"><input type="text" class="form-control"/></td>
+                <td th:if="${!practice}" th:text = "${card.sentence}"></td>
+            </tr>
+        </table>
+</div>
+    </body>
+    <footer th:replace="~{fragments :: footer}"></header>
+</html>
