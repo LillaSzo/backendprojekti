@@ -11,7 +11,10 @@
 
         <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="fw-bold">Your Decks</h2>
-        <a th:href="@{/create}" class="btn btn-success">+ Create Deck</a>
+            <div class="d-flex gap-2">
+            <a th:href="@{/community}" class="btn btn-success">+ Join Deck</a>
+            <a th:href="@{/create}" class="btn btn-success">+ Create Deck</a>
+            </div>
         </div>    
 
         <table class="table table-hover align-middle mb-0" style="box-shadow: 0 4px 8px rgba(0,0,0,0.2)">

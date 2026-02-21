@@ -19,13 +19,28 @@
             <tr>
                 <th>Target Word</th>
                 <th>Translation</th>
+                <th th:if="${practice}">Actions</th>
                 <th th:if="${!practice}">Sentence</th>
             </tr>
         </thead>
             <tr th:each = "card : ${cards}">
                 <td th:text = "${card.targetWord}"></td>
                 <td th:if="${!practice}" th:text = "${card.translation}"></td>
-                <td th:if="${practice}"><input type="text" class="form-control"/></td>
+                <td th:if="${practice}">
+
+                <form th:action="@{/check}" method="post" class="d-flex gap-2">
+                    
+                    <input type="hidden" name="cardid" th:value="${card.cardid}" />
+                    <input type="hidden" name="deckid" th:value="${deck.deckid}" />
+
+                    <input type="text" name="answer" class="form-control" placeholder="Write translation"/>
+                    <button type="submit" class="btn btn-outline-success">Check</button>
+                </form>
+
+                <div th:if="${cardid == card.cardid}" th:style="${correct} ? 'color:green' : 'color:red'">
+                    <span th:text="${message}"></span>
+                </div>
+                </td>
                 <td th:if="${!practice}" th:text = "${card.sentence}"></td>
             </tr>
         </table>

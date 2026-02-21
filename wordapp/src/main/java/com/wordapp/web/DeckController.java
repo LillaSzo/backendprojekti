@@ -25,7 +25,7 @@ public class DeckController {
     }
 
     @GetMapping("/main")
-    public String showMain(Model model){
+    public String showDecks(Model model){
         model.addAttribute("decks", deckRepository.findAll());
         return "main";
     }

@@ -38,14 +38,13 @@ public class CardController {
     }
 
     @PostMapping("/deck/{id}/addword")
-    public String saveWords(@PathVariable("id") Long deckid, @Valid Card card, BindingResult bindingResult, Model model){
+    public String saveCard(@PathVariable("id") Long deckid, @Valid Card card, BindingResult bindingResult, Model model){
 
         Deck deck = deckRepository.findById(deckid)
                                 .orElseThrow(()-> new IllegalArgumentException("Deck not found"));
 
         if(bindingResult.hasErrors()){
             model.addAttribute("deck", deck);
-            model.addAttribute("card", card);
             return "addword";
         }
         card.setDeck(deck);
