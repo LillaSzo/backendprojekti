@@ -27,7 +27,7 @@ public class RestDeckController {
         return deckRepository.findAll();
     }
 
-    @PostMapping("/decks")
+    @PostMapping("/deck")
     public Deck postNewDeck(@RequestBody Deck newDeck){
         return deckRepository.save(newDeck);
     }

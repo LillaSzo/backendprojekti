@@ -6,6 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wordapp.domain.Card;
 import com.wordapp.domain.CardRepository;
@@ -50,6 +51,11 @@ public class CardController {
         card.setDeck(deck);
         cardRepository.save(card);
         return "redirect:/main";
+    }
+    @GetMapping("/deletecard")
+    public String deleteCard(@RequestParam Long deckid, @RequestParam Long cardid){
+        cardRepository.deleteById(cardid);
+        return "redirect:/edit/" + deckid;
     }
 
 }

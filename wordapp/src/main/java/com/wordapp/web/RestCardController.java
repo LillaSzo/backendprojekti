@@ -31,12 +31,12 @@ public class RestCardController {
     public Iterable<Card> findAllCards(){
         return cardRepository.findAll();
     }
-    @GetMapping("cards/{id}")
+    @GetMapping("card/{id}")
     public Optional<Card> findCardById(@PathVariable("id") Long cardid){
        return cardRepository.findById(cardid); 
     }
 
-    @PostMapping("decks/{id}/cards")
+    @PostMapping("decks/{id}/card")
     public Card postNewCard(@PathVariable("id") Long deckid, @RequestBody Card newCard){
         Deck deck = deckRepository.findById(deckid)
             .orElseThrow(() -> new RuntimeException("Deck not found"));
