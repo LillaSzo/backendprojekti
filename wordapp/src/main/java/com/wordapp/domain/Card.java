@@ -23,8 +23,7 @@ public class Card {
 
     public Card(){}
 
-    public Card(Long cardid, String targetWord, String translation, String sentence, Deck deck) {
-        this.cardid = cardid;
+    public Card(String targetWord, String translation, String sentence, Deck deck) {
         this.targetWord = targetWord;
         this.translation = translation;
         this.sentence = sentence;

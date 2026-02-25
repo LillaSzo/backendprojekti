@@ -10,7 +10,7 @@
 <div class="container mt-5">
 
         <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-bold">Practice</h2>
+        <h2 class="fw-bold">Practice: <span th:text="${deck.name}"></span></h2>
         <a th:href="@{/practice/deck/{id}(id=${deck.deckid}, practice=true)}" class="btn btn-success">Practice</a>
         </div>    
 

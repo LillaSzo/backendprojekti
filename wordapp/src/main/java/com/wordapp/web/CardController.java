@@ -52,6 +52,7 @@ public class CardController {
         cardRepository.save(card);
         return "redirect:/main";
     }
+    
     @GetMapping("/deletecard")
     public String deleteCard(@RequestParam Long deckid, @RequestParam Long cardid){
         cardRepository.deleteById(cardid);

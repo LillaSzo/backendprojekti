@@ -5,6 +5,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import com.wordapp.domain.Card;
+import com.wordapp.domain.CardRepository;
+import com.wordapp.domain.Deck;
+import com.wordapp.domain.DeckRepository;
 import com.wordapp.domain.Language;
 import com.wordapp.domain.LanguageRepository;
 
@@ -17,7 +21,7 @@ public class WordappApplication {
 	}
 
 	@Bean
-	public CommandLineRunner saveLanguages(LanguageRepository languageRepository){
+	public CommandLineRunner saveLanguages(LanguageRepository languageRepository, DeckRepository deckRepository, CardRepository cardRepository){
 		return (args) -> {
 			Language language1 = new Language("Finnish");
 			Language language2 = new Language("English");
@@ -33,7 +37,16 @@ public class WordappApplication {
 			languageRepository.save(language4);
 			languageRepository.save(language5);
 			languageRepository.save(language6);
-			languageRepository.save(language7);		
+			languageRepository.save(language7);
+			
+			Deck deck = new Deck("Test deck 1", language1, language2, 0);
+			 deckRepository.save(deck);
+
+			Card card1 = new Card("kissa", "cat", "Heikki on paras kissa maailmassa", deck);
+			Card card2 = new Card("nuolinotaatio", "arrow notation", "Funktiota määritellään nuolinotaatiolla", deck);
+			cardRepository.save(card1);
+			cardRepository.save(card2);
+
 		};
 	}
 
