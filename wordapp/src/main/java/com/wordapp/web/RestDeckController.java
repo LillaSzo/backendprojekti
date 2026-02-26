@@ -16,7 +16,7 @@ import com.wordapp.domain.DeckRepository;
 @RestController
 public class RestDeckController {
 
-    private DeckRepository deckRepository;
+    private  final DeckRepository deckRepository;
 
     public RestDeckController(DeckRepository deckRepository){
         this.deckRepository = deckRepository;

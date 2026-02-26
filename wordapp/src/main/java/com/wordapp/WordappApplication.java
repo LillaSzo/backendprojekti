@@ -21,7 +21,7 @@ public class WordappApplication {
 	}
 
 	@Bean
-	public CommandLineRunner saveLanguages(LanguageRepository languageRepository, DeckRepository deckRepository, CardRepository cardRepository){
+	public CommandLineRunner saveToDB(LanguageRepository languageRepository, DeckRepository deckRepository, CardRepository cardRepository){
 		return (args) -> {
 			Language language1 = new Language("Finnish");
 			Language language2 = new Language("English");

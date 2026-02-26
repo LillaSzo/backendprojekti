@@ -17,27 +17,24 @@
         <table class="table table-hover align-middle mb-0" style="box-shadow: 0 4px 8px rgba(0,0,0,0.2)">
         <thead class="table-light">
             <tr>
-                <th>Target Word</th>
                 <th>Translation</th>
+                <th>Target Word</th>
                 <th th:if="${practice}">Actions</th>
                 <th th:if="${!practice}">Sentence</th>
             </tr>
         </thead>
             <tr th:each = "card : ${cards}">
-                <td th:text = "${card.targetWord}"></td>
-                <td th:if="${!practice}" th:text = "${card.translation}"></td>
+                <td th:text = "${card.translation}"></td>
+                <td th:if="${!practice}" th:text = "${card.targetWord}"></td>
                 <td th:if="${practice}">
 
-                <form th:action="@{/check}" method="post" class="d-flex gap-2">
-                    
-                    <input type="hidden" name="cardid" th:value="${card.cardid}" />
-                    <input type="hidden" name="deckid" th:value="${deck.deckid}" />
+                <form th:action="@{/practice/deck/{deckid}/card/{cardid}/check(deckid=${deck.deckid}, cardid=${card.cardid})}" method="post" class="d-flex gap-2">
 
-                    <input type="text" name="answer" class="form-control" placeholder="Write translation"/>
+                    <input type="text" name="answer" class="form-control" placeholder="Write target word"/>
                     <button type="submit" class="btn btn-outline-success">Check</button>
                 </form>
 
-                <div th:if="${cardid == card.cardid}" th:style="${correct} ? 'color:green' : 'color:red'">
+                <div th:if="${cardid == card.cardid}" th:classappend="${correct} ? 'text-success' : 'text-danger'">
                     <span th:text="${message}"></span>
                 </div>
                 </td>
@@ -46,5 +43,5 @@
         </table>
 </div>
     </body>
-    <footer th:replace="~{fragments :: footer}"></header>
+    <footer th:replace="~{fragments :: footer}"></footer>
 </html>

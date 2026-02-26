@@ -16,8 +16,8 @@ import jakarta.validation.Valid;
 @Controller
 public class DeckController {
 
-    private DeckRepository deckRepository;
-    private LanguageRepository languageRepository;
+    private final DeckRepository deckRepository;
+    private final LanguageRepository languageRepository;
 
     public DeckController(DeckRepository drepository, LanguageRepository lrepository){
         this.deckRepository = drepository;

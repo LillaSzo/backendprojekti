@@ -18,8 +18,8 @@ import jakarta.validation.Valid;
 @Controller
 public class CardController {
 
-    private CardRepository cardRepository;
-    private DeckRepository deckRepository;
+    private final CardRepository cardRepository;
+    private final DeckRepository deckRepository;
 
     public CardController(CardRepository cardRepository, DeckRepository deckRepository){
         this.cardRepository = cardRepository;

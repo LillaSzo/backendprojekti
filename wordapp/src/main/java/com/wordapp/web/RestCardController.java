@@ -19,8 +19,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RestController
 public class RestCardController {
 
-    private CardRepository cardRepository;
-    private DeckRepository deckRepository;
+    private final CardRepository cardRepository;
+    private final DeckRepository deckRepository;
 
     public RestCardController(CardRepository cardRepository, DeckRepository deckRepository){
         this.cardRepository = cardRepository;
