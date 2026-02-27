@@ -11,6 +11,8 @@ import com.wordapp.domain.Deck;
 import com.wordapp.domain.DeckRepository;
 import com.wordapp.domain.Language;
 import com.wordapp.domain.LanguageRepository;
+import com.wordapp.domain.AppUser;
+import com.wordapp.domain.AppUserRepository;
 
 @SpringBootApplication
 public class WordappApplication {
@@ -21,7 +23,7 @@ public class WordappApplication {
 	}
 
 	@Bean
-	public CommandLineRunner saveToDB(LanguageRepository languageRepository, DeckRepository deckRepository, CardRepository cardRepository){
+	public CommandLineRunner saveToDB(LanguageRepository languageRepository, DeckRepository deckRepository, CardRepository cardRepository, AppUserRepository appUserRepository){
 		return (args) -> {
 			Language language1 = new Language("Finnish");
 			Language language2 = new Language("English");
@@ -47,6 +49,11 @@ public class WordappApplication {
 			cardRepository.save(card1);
 			cardRepository.save(card2);
 
+			AppUser user1 = new AppUser("user", "$2a$10$1cJNYnutdH2IGd0Dhvhd5.Mqc1a38Bqj4ayuNK/CdQpyIRE.axyKW", "USER");
+			AppUser user2 = new AppUser("admin", "$2a$10$yYvXB2c7D3TL7oOX6hO/auIMQtm1sCWmXiWSEzhbSfhV5/uMDJzf.", "ADMIN");
+
+			appUserRepository.save(user1);
+			appUserRepository.save(user2);
 		};
 	}
 

@@ -31,7 +31,7 @@ public class RestCardController {
     public Iterable<Card> findAllCards(){
         return cardRepository.findAll();
     }
-    @GetMapping("card/{id}")
+    @GetMapping("cards/{id}")
     public Optional<Card> findCardById(@PathVariable("id") Long cardid){
        return cardRepository.findById(cardid); 
     }

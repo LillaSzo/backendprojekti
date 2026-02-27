@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Add User</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head> 
+<body style="background-color: rgb(255, 243, 205)">
+
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+    <div class="card shadow-lg" style="width: 100%; max-width: 420px; border-radius: 15px;">
+        
+        <div class="card-body p-5">
+
+            <div class="text-center mb-4">
+                <h3 class="fw-bold">WordApp</h3>
+            </div>
+
+            <hr>
+            
+            <form th:object="${signupform}" th:action="@{/saveuser}" method="post">
+                
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input type="text" th:field="*{username}" class="form-control" placeholder="Enter your username"/>
+                    <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-warning"></p>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" th:field="*{password}" class="form-control" placeholder="Enter your password"/>
+                    <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-warning"></p>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Re-type Password</label>
+                    <input type="password" th:field="*{passwordCheck}" class="form-control" placeholder="Re-enter your password"/>
+                    <p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}" class="alert alert-warning"></p>
+                </div>
+
+                <div class="d-grid mb-3">
+                    <input type="submit" value="Sign Up" class="btn btn-success fw-bold"/>
+                </div>
+            </form>
+
+            <hr>
+
+            <div class="text-center">
+                <p class="mb-1">Already have an account?</p>
+                <a th:href="@{/login}" class="btn btn-outline-success">Sign In</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

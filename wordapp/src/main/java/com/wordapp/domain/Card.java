@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
 @Entity
+@Table(name="Card")
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

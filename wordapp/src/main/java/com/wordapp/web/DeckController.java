@@ -23,7 +23,12 @@ public class DeckController {
         this.deckRepository = drepository;
         this.languageRepository = lrepository;
     }
-
+    
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+    
     @GetMapping("/main")
     public String showDecks(Model model){
         model.addAttribute("decks", deckRepository.findAll());
