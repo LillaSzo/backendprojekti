@@ -1,5 +1,9 @@
 package com.wordapp.domain;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -19,6 +23,11 @@ public class AppUser {
 
     @Column(name = "role", nullable = false)
     private String role;
+
+	@JsonManagedReference
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+    private List<Deck> decklist;
+
     
     public AppUser() {
     }

@@ -40,20 +40,21 @@ public class WordappApplication {
 			languageRepository.save(language5);
 			languageRepository.save(language6);
 			languageRepository.save(language7);
+	
+			AppUser user1 = new AppUser("user", "$2a$10$1cJNYnutdH2IGd0Dhvhd5.Mqc1a38Bqj4ayuNK/CdQpyIRE.axyKW", "USER");
+			AppUser user2 = new AppUser("admin", "$2a$10$yYvXB2c7D3TL7oOX6hO/auIMQtm1sCWmXiWSEzhbSfhV5/uMDJzf.", "ADMIN");
+
+			appUserRepository.save(user1);
+			appUserRepository.save(user2);
 			
-			Deck deck = new Deck("Test deck 1", language1, language2, 0);
-			 deckRepository.save(deck);
+			Deck deck = new Deck("Test deck 1", language1, language2, user1, 2);
+			deckRepository.save(deck);
 
 			Card card1 = new Card("kissa", "cat", "Heikki on paras kissa maailmassa", deck);
 			Card card2 = new Card("nuolinotaatio", "arrow notation", "Funktiota määritellään nuolinotaatiolla", deck);
 			cardRepository.save(card1);
 			cardRepository.save(card2);
 
-			AppUser user1 = new AppUser("user", "$2a$10$1cJNYnutdH2IGd0Dhvhd5.Mqc1a38Bqj4ayuNK/CdQpyIRE.axyKW", "USER");
-			AppUser user2 = new AppUser("admin", "$2a$10$yYvXB2c7D3TL7oOX6hO/auIMQtm1sCWmXiWSEzhbSfhV5/uMDJzf.", "ADMIN");
-
-			appUserRepository.save(user1);
-			appUserRepository.save(user2);
 		};
 	}
 

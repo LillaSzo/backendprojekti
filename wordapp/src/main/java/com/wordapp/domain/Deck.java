@@ -12,15 +12,21 @@ import jakarta.validation.constraints.Size;
 public class Deck {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "deck_id")
     private Long deckid;
     @Size(min=2, max=30)
+    @Column(name = "name")
     private String name; 
     @ManyToOne
-    @JoinColumn(name="targetlanguageid")
+    @JoinColumn(name="target_language_id")
     private Language targetLanguage;  
     @ManyToOne
-    @JoinColumn(name="translationlanguageid")
+    @JoinColumn(name="translation_language_id")
     private Language translationLanguage;
+    @ManyToOne
+    @JoinColumn(name="user_id")
+    private AppUser userId;
+    @Column(name ="wordcount")
     private int wordcount;
 
     @JsonManagedReference
@@ -30,10 +36,11 @@ public class Deck {
     public Deck() {
     }
 
-    public Deck(String name, Language targetLanguage, Language translationLanguage, int wordcount) {
+    public Deck(String name, Language targetLanguage, Language translationLanguage, AppUser userId, int wordcount) {
         this.name = name;
         this.targetLanguage = targetLanguage;
         this.translationLanguage = translationLanguage;
+        this.userId = userId;
         this.wordcount = wordcount;
     }
 
@@ -69,6 +76,14 @@ public class Deck {
         this.translationLanguage = translationLanguage;
     }
 
+    public AppUser getUserId(){
+        return userId;
+    }
+
+    public void setAppUserName(AppUser userId){
+        this.userId = userId;
+    }
+
     public int getWordcount() {
         return cardlist.size();
     }
@@ -88,7 +103,7 @@ public class Deck {
     @Override
     public String toString() {
         return "Deck [deckid=" + deckid + ", name=" + name + ", targetLanguage=" + targetLanguage
-                + ", translationLanguage=" + translationLanguage + ", wordcount=" + wordcount + "]";
+                + ", translationLanguage=" + translationLanguage + ", userId=" + userId + ", wordcount=" + wordcount + "]";
     }
 
     
