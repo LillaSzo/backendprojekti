@@ -10,11 +10,15 @@ import jakarta.validation.constraints.Size;
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="card_id", nullable = false, updatable = false)
     private Long cardid;
     @Size(min=2, max=20)
+    @Column(name="target_word")
     private String targetWord;
     @Size(min=2, max=20)
+    @Column(name="translation")
     private String translation;
+    @Column(name="sentence")
     private String sentence;
 
     @JsonBackReference

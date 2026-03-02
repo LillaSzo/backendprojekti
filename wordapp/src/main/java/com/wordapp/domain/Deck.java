@@ -12,7 +12,7 @@ import jakarta.validation.constraints.Size;
 public class Deck {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "deck_id")
+    @Column(name = "deck_id", nullable = false, updatable = false)
     private Long deckid;
     @Size(min=2, max=30)
     @Column(name = "name")
@@ -78,6 +78,9 @@ public class Deck {
 
     public AppUser getUserId(){
         return userId;
+    } 
+    public void  setUserId(AppUser userId){
+        this.userId = userId;
     }
 
     public void setAppUserName(AppUser userId){
