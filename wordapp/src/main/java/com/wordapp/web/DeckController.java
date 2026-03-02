@@ -30,6 +30,7 @@ public class DeckController {
         this.appUserRepository = appUserRepository;
     }
     
+    //https://www.baeldung.com/get-user-in-spring-security
     private AppUser getCurrentUser() {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     String username = authentication.getName();
@@ -43,7 +44,11 @@ public class DeckController {
     
     @GetMapping("/main")
     public String showDecks(Model model){
-        model.addAttribute("decks", deckRepository.findAll());
+        AppUser currentUser = getCurrentUser();
+        
+        model.addAttribute("decks", currentUser.getDecklist());
+        model.addAttribute("joined", currentUser.getJoinedDeck());
+
         return "main";
     }
 

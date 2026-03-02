@@ -1,6 +1,7 @@
 package com.wordapp.domain;
 
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -8,7 +9,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name="Deck")
+@Table(name="Decks")
 public class Deck {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -28,6 +29,9 @@ public class Deck {
     private AppUser userId;
     @Column(name ="wordcount")
     private int wordcount;
+    //https://www.baeldung.com/jpa-many-to-many
+    @ManyToMany(mappedBy = "joinedDeck")
+    Set <AppUser> joinedUsers;
 
     @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "deck")
@@ -103,12 +107,14 @@ public class Deck {
         this.cardlist = cardlist;
     }
 
-    @Override
-    public String toString() {
-        return "Deck [deckid=" + deckid + ", name=" + name + ", targetLanguage=" + targetLanguage
-                + ", translationLanguage=" + translationLanguage + ", userId=" + userId + ", wordcount=" + wordcount + "]";
+    public Set<AppUser> getJoinedUsers() {
+        return joinedUsers;
     }
 
+    public void setJoinedUsers(Set<AppUser> joinedUsers) {
+        this.joinedUsers = joinedUsers;
+    }
     
-
+   
+    
 }

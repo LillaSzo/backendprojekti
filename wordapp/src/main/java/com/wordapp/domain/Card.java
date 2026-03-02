@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name="Card")
+@Table(name="Cards")
 public class Card {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,7 +23,7 @@ public class Card {
 
     @JsonBackReference
     @ManyToOne
-    @JoinColumn(name="deckid")
+    @JoinColumn(name="deck_id")
     private Deck deck;
 
     public Card(){}

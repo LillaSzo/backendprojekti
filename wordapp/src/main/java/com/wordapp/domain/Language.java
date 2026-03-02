@@ -3,7 +3,7 @@ package com.wordapp.domain;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="Language")
+@Table(name="Languages")
 public class Language {
 
     @Id

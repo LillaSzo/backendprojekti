@@ -1,13 +1,14 @@
 package com.wordapp.domain;
 
 import java.util.List;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="App_user")
+@Table(name="App_users")
 public class AppUser {
 
     @Id
@@ -23,6 +24,14 @@ public class AppUser {
 
     @Column(name = "role", nullable = false)
     private String role;
+
+	//https://www.baeldung.com/jpa-many-to-many
+	@ManyToMany
+	@JoinTable(
+		name = "joined_decks",
+		joinColumns = @JoinColumn(name = "user_id"),
+		inverseJoinColumns = @JoinColumn(name = "deck_id"))
+	Set<Deck> joinedDeck;
 
 	@JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
@@ -71,4 +80,22 @@ public class AppUser {
 		this.role = role;
 	}
 
+	public List<Deck> getDecklist() {
+		return decklist;
+	}
+
+	public void setDecklist(List<Deck> decklist) {
+		this.decklist = decklist;
+	}
+
+	public Set<Deck> getJoinedDeck() {
+		return joinedDeck;
+	}
+
+	public void setJoinedDeck(Set<Deck> joinedDeck) {
+		this.joinedDeck = joinedDeck;
+	}
+
+	
+	
 }

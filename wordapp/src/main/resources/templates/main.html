@@ -13,8 +13,7 @@
         <h2>Hello <span sec:authentication="name"></span>!</h2>
         <h2 class="fw-bold">Your Decks</h2>
             <div class="d-flex gap-2">
-            <a th:href="@{/community}" class="btn btn-success">+ Join Deck</a>
-            <a th:href="@{/create}" class="btn btn-success">+ Create Deck</a>
+            <a th:href="@{/create}" class="btn btn-outline-success">+ Create Deck</a>
             </div>
         </div>    
 
@@ -38,6 +37,33 @@
                 <a th:href="@{/edit/{id}(id=${deck.deckid})}" class="btn btn-success">Edit</a>
                 <a th:href="@{/practice/deck/{id}(id=${deck.deckid})}" class="btn btn-success">Practice</a>
                 <a th:href="@{/delete/{id}(id=${deck.deckid})}" class="btn btn-danger">Delete</a></td>
+            </tr>
+        </table>
+
+        <div class="d-flex justify-content-between align-items-center mb-4 mt-5">
+        <h2 class="fw-bold">Community Decks</h2>
+        <a th:href="@{/community}" class="btn btn-outline-success">+ Join Deck</a></div>    
+
+        <table class="table table-hover align-middle mb-0" style="box-shadow: 0 4px 8px rgba(0,0,0,0.2)">
+            <thead class="table-light">
+            <tr>
+            <th>Name</th>
+            <th>Target Language</th>
+            <th>Translation</th>
+            <th>Word Count</th>
+            <th class="text-end">Actions</th>
+            </tr>
+            </thead>
+
+            <tr th:each = "deck : ${joined}">
+                <td th:text="${deck.name}"></td>
+                <td th:text="${deck.targetLanguage}"></td>
+                <td th:text="${deck.translationLanguage}"></td>
+                <td th:text="${deck.wordcount}"></td>
+                <td class="text-end"><a th:href="@{/deck/{id}/addword(id=${deck.deckid})}" sec:authorize="${hasAuthority('ADMIN')}" class="btn btn-success">Add word</a>
+                <a sec:authorize="${hasAuthority('ADMIN')}" th:href="@{/edit/{id}(id=${deck.deckid})}" class="btn btn-success">Edit</a>
+                <a sec:authorize="${hasAuthority('USER')}" th:href="@{/practice/deck/{id}(id=${deck.deckid})}" class="btn btn-success">Practice</a>
+                <a sec:authorize="${hasAuthority('ADMIN')}" th:href="@{/delete/{id}(id=${deck.deckid})}" class="btn btn-danger">Delete</a></td>
             </tr>
         </table>
  

@@ -47,11 +47,14 @@ public class WordappApplication {
 			appUserRepository.save(user1);
 			appUserRepository.save(user2);
 			
-			Deck deck = new Deck("Test deck 1", language1, language2, user1, 2);
+			Deck deck = new Deck("Test deck 1", language1, language2, user1, 1);
+			Deck deck2 = new Deck("Ohjelmointi", language1, language2, user2, 1);
 			deckRepository.save(deck);
+			deckRepository.save(deck2);
+
 
 			Card card1 = new Card("kissa", "cat", "Heikki on paras kissa maailmassa", deck);
-			Card card2 = new Card("nuolinotaatio", "arrow notation", "Funktiota määritellään nuolinotaatiolla", deck);
+			Card card2 = new Card("nuolinotaatio", "arrow notation", "Funktiota määritellään nuolinotaatiolla", deck2);
 			cardRepository.save(card1);
 			cardRepository.save(card2);
 
