@@ -1,5 +1,6 @@
 package com.wordapp.web;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -35,7 +36,7 @@ public class DeckController {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
     String username = authentication.getName();
     return appUserRepository.findByUsername(username);
-}
+    }
     
     @GetMapping("/login")
     public String login() {
@@ -71,12 +72,14 @@ public class DeckController {
     }
 
     @GetMapping("/delete/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().userId.username == authentication.name")
     public String deleteDeck(@PathVariable("id") Long deckid){
         deckRepository.deleteById(deckid);
         return "redirect:/main";
     }
 
     @GetMapping("/edit/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().userId.username == authentication.name")
     public String pickEdit(@PathVariable("id") Long deckid, Model model){
         Deck deck = deckRepository.findById(deckid)
                                 .orElseThrow(()-> new IllegalArgumentException("Deck not found"));
@@ -87,6 +90,7 @@ public class DeckController {
     }
 
     @PostMapping("/edit/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().userId.username == authentication.name")
     public String editDeck(@PathVariable("id") Long deckid, @Valid Deck deck, BindingResult bindingresult, Model model){
         
         if(bindingresult.hasErrors()){

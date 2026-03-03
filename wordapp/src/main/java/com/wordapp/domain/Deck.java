@@ -27,8 +27,9 @@ public class Deck {
     @ManyToOne
     @JoinColumn(name="user_id")
     private AppUser userId;
-    @Column(name ="wordcount")
+    @Transient
     private int wordcount;
+    
     //https://www.baeldung.com/jpa-many-to-many
     @ManyToMany(mappedBy = "joinedDeck")
     Set <AppUser> joinedUsers;
@@ -40,12 +41,11 @@ public class Deck {
     public Deck() {
     }
 
-    public Deck(String name, Language targetLanguage, Language translationLanguage, AppUser userId, int wordcount) {
+    public Deck(String name, Language targetLanguage, Language translationLanguage, AppUser userId) {
         this.name = name;
         this.targetLanguage = targetLanguage;
         this.translationLanguage = translationLanguage;
         this.userId = userId;
-        this.wordcount = wordcount;
     }
 
     public Long getDeckid() {

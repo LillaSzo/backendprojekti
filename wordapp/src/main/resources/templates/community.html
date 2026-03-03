@@ -11,7 +11,7 @@
 
         <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="fw-bold">Community Decks</h2>
-        <a sec:authorize="hasRole('ADMIN')" th:href="@{/create}" class="btn btn-success">+ Create Community Deck</a>
+        <a sec:authorize="${hasAuthority('ADMIN')}"  th:href="@{/create}" class="btn btn-outline-success">+ Create Community Deck</a>
         </div>    
 
         <table class="table table-hover align-middle mb-0" style="box-shadow: 0 4px 8px rgba(0,0,0,0.2)">
@@ -31,9 +31,10 @@
                 <td th:text="${deck.translationLanguage}"></td>
                 <td th:text="${deck.wordcount}"></td>
                 <td class="text-end"><a sec:authorize="hasRole('ADMIN')" th:href="@{/deck/{id}/addword(id=${deck.deckid})}" class="btn btn-success">Add word</a>
+                <a sec:authorize="${hasAuthority('ADMIN')}" th:href="@{/deck/{id}/addword(id=${deck.deckid})}" class="btn btn-success">Add word</a>
                 <a sec:authorize="${hasAuthority('ADMIN')}" th:href="@{/edit/{id}(id=${deck.deckid})}" class="btn btn-success">Edit</a>
                 <a sec:authorize="${hasAuthority('ADMIN')}" th:href="@{/delete/{id}(id=${deck.deckid})}" class="btn btn-danger">Delete</a>
-                <form sec:authorize="${hasAuthority('USER')}" th:object="${deck}" th:action="@{/deck/{id}/join(id=${deck.deckid})}" method="post">
+                <form sec:authorize="${hasAuthority('USER')}" th:object="${deck}" th:action="@{/deck/{id}/join(id=${deck.deckid})}" method="post" >
                 <input type="submit" value="+ Join deck" class="btn btn-success"></input>
                 </form></td>
 

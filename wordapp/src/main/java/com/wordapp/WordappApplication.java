@@ -47,8 +47,8 @@ public class WordappApplication {
 			appUserRepository.save(user1);
 			appUserRepository.save(user2);
 			
-			Deck deck = new Deck("Test deck 1", language1, language2, user1, 1);
-			Deck deck2 = new Deck("Ohjelmointi", language1, language2, user2, 1);
+			Deck deck = new Deck("Test deck 1", language1, language2, user1);
+			Deck deck2 = new Deck("Ohjelmointi", language1, language2, user2);
 			deckRepository.save(deck);
 			deckRepository.save(deck2);
 

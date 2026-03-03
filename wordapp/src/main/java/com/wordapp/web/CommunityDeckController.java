@@ -14,7 +14,6 @@ import com.wordapp.domain.AppUser;
 import com.wordapp.domain.AppUserRepository;
 import com.wordapp.domain.Deck;
 import com.wordapp.domain.DeckRepository;
-import com.wordapp.domain.LanguageRepository;
 
 @Controller
 public class CommunityDeckController {
@@ -50,8 +49,8 @@ public class CommunityDeckController {
         AppUser currentUser = getCurrentUser();
         currentUser.getJoinedDeck().add(deck);
         appUserRepository.save(currentUser);
-        
-        return "redirect:/community";
+
+        return "redirect:/main";
     }
 
 }
