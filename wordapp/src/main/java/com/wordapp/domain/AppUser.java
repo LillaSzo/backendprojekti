@@ -3,7 +3,8 @@ package com.wordapp.domain;
 import java.util.List;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
 
@@ -20,6 +21,7 @@ public class AppUser {
     private String username;
 
     @Column(name = "password", nullable = false)
+	@JsonIgnore
     private String passwordHash;
 
     @Column(name = "role", nullable = false)
@@ -31,10 +33,11 @@ public class AppUser {
 		name = "joined_decks",
 		joinColumns = @JoinColumn(name = "user_id"),
 		inverseJoinColumns = @JoinColumn(name = "deck_id"))
+	@JsonIgnoreProperties("joinedUsers")
 	Set<Deck> joinedDeck;
 
-	@JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+	@JsonIgnoreProperties("userId")
     private List<Deck> decklist;
 
     

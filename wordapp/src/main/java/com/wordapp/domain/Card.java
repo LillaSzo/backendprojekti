@@ -1,6 +1,6 @@
 package com.wordapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
@@ -12,18 +12,21 @@ public class Card {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="card_id", nullable = false, updatable = false)
     private Long cardid;
+
     @Size(min=2, max=20)
     @Column(name="target_word")
     private String targetWord;
+
     @Size(min=2, max=20)
     @Column(name="translation")
     private String translation;
+    
     @Column(name="sentence")
     private String sentence;
 
-    @JsonBackReference
     @ManyToOne
     @JoinColumn(name="deck_id")
+    @JsonIgnoreProperties("cardlist")
     private Deck deck;
 
     public Card(){}

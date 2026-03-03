@@ -10,8 +10,10 @@ public class Language {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="language_id", nullable = false, updatable = false)
     private Long id;
+
     @Column(name="language")
     private String name;
+    
     public Language(){}
 
     public Language(String name) {

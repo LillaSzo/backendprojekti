@@ -3,7 +3,7 @@ package com.wordapp.domain;
 import java.util.List;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
@@ -15,27 +15,34 @@ public class Deck {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "deck_id", nullable = false, updatable = false)
     private Long deckid;
+
     @Size(min=2, max=30)
     @Column(name = "name")
     private String name; 
+
     @ManyToOne
     @JoinColumn(name="target_language_id")
-    private Language targetLanguage;  
+    private Language targetLanguage;
+
     @ManyToOne
     @JoinColumn(name="translation_language_id")
     private Language translationLanguage;
+
     @ManyToOne
     @JoinColumn(name="user_id")
+    @JsonIgnoreProperties("decklist")
     private AppUser userId;
+    
     @Transient
     private int wordcount;
     
     //https://www.baeldung.com/jpa-many-to-many
     @ManyToMany(mappedBy = "joinedDeck")
+    @JsonIgnoreProperties("joinedDeck")
     Set <AppUser> joinedUsers;
 
-    @JsonManagedReference
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "deck")
+    @JsonIgnoreProperties("deck")
     private List<Card> cardlist;
 
     public Deck() {
