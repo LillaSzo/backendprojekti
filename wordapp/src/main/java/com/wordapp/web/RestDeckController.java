@@ -2,6 +2,7 @@ package com.wordapp.web;
 
 import java.util.Optional;
 
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,12 +39,14 @@ public class RestDeckController {
     }
 
     @PutMapping("decks/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().userId.username == authentication.name")
     public Deck updateDeck(@PathVariable("id") Long deckid, @RequestBody Deck updatedDeck){
     deckRepository.findById(deckid);
     return deckRepository.save(updatedDeck);
     }
 
     @DeleteMapping("decks/{id}")
+    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().userId.username == authentication.name")
     public Iterable<Deck> deleteDeck(@PathVariable("id") Long deckid){
         deckRepository.deleteById(deckid);
         return deckRepository.findAll();
