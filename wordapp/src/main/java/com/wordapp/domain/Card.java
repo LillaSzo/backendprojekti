@@ -6,10 +6,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name="Cards")
+@Table(name="cards")
 public class Card {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="card_id", nullable = false, updatable = false)
     private Long cardid;
 

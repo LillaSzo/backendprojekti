@@ -9,10 +9,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table(name="Decks")
+@Table(name="decks")
 public class Deck {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "deck_id", nullable = false, updatable = false)
     private Long deckid;
 

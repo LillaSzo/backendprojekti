@@ -3,11 +3,11 @@ package com.wordapp.domain;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="Languages")
+@Table(name="languages")
 public class Language {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="language_id", nullable = false, updatable = false)
     private Long id;
 

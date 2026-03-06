@@ -9,7 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="App_users")
+@Table(name="app_users")
 public class AppUser {
 
     @Id
