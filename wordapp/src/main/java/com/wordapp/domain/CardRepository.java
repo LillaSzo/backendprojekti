@@ -5,4 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface CardRepository extends CrudRepository<Card, Long>{
     List<Card> findByDeckDeckid(Long deckid);
+
+    List<Card> findByTargetWord(String targetWord);
 }
