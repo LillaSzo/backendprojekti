@@ -33,7 +33,7 @@ public class AppUser {
 		name = "joined_decks",
 		joinColumns = @JoinColumn(name = "user_id"),
 		inverseJoinColumns = @JoinColumn(name = "deck_id"))
-	@JsonIgnoreProperties("joinedUsers")
+	@JsonIgnoreProperties({"joinedUsers", "userId"})
 	Set<Deck> joinedDeck;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")

@@ -30,7 +30,7 @@ public class Deck {
 
     @ManyToOne
     @JoinColumn(name="user_id")
-    @JsonIgnoreProperties("decklist")
+    @JsonIgnoreProperties({"decklist", "joinedDeck"})
     private AppUser userId;
     
     @Transient
@@ -38,7 +38,7 @@ public class Deck {
     
     //https://www.baeldung.com/jpa-many-to-many
     @ManyToMany(mappedBy = "joinedDeck")
-    @JsonIgnoreProperties("joinedDeck")
+    @JsonIgnoreProperties({"joinedDeck", "decklist"})
     Set <AppUser> joinedUsers;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "deck")

@@ -27,9 +27,8 @@ public class WebSecurityConfig {
 				.requestMatchers("/signup/**").permitAll()
 				.requestMatchers("/saveuser").permitAll()
 				.requestMatchers("/css/**").permitAll()
-				.requestMatchers("/h2-console/**").permitAll()
 				.anyRequest().authenticated())
-				.httpBasic(Customizer.withDefaults()) //postman Basuc Auth
+				.httpBasic(Customizer.withDefaults()) //postman Basic Auth
 				.headers(headers -> 
 					headers.frameOptions(frameOptions -> frameOptions 
 						.disable())) 
