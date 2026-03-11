@@ -66,20 +66,20 @@ public class DeckController {
             model.addAttribute("languages", languageRepository.findAll());
             return"createdeck";
         }
-        deck.setUserId(getCurrentUser());
+        deck.setUser(getCurrentUser());
         deckRepository.save(deck);
         return "redirect:/main";
     }
 
     @GetMapping("/delete/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().userId.username == authentication.name")
+    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().user.username == authentication.name")
     public String deleteDeck(@PathVariable("id") Long deckid){
         deckRepository.deleteById(deckid);
         return "redirect:/main";
     }
 
     @GetMapping("/edit/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().userId.username == authentication.name")
+    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().user.username == authentication.name")
     public String pickEdit(@PathVariable("id") Long deckid, Model model){
         Deck deck = deckRepository.findById(deckid)
                                 .orElseThrow(()-> new IllegalArgumentException("Deck not found"));
@@ -90,14 +90,14 @@ public class DeckController {
     }
 
     @PostMapping("/edit/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().userId.username == authentication.name")
+    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().user.username == authentication.name")
     public String editDeck(@PathVariable("id") Long deckid, @Valid Deck deck, BindingResult bindingresult, Model model){
         
         if(bindingresult.hasErrors()){
             model.addAttribute("languages", languageRepository.findAll());
             return "editdeck";
         }
-        deck.setUserId(getCurrentUser());
+        deck.setUser(getCurrentUser());
         deckRepository.save(deck);
         return "redirect:/main";
     }

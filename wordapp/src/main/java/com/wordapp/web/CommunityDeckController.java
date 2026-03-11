@@ -36,7 +36,7 @@ public class CommunityDeckController {
     @GetMapping("/community")
     public String showCommunity(Model model){
 
-        List<Deck> adminDecks = deckRepository.findByUserIdRole("ADMIN");     
+        List<Deck> adminDecks = deckRepository.findByUserRole("ADMIN");     
         model.addAttribute("decks", adminDecks);
         return "community";
     }

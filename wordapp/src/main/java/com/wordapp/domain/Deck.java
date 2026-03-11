@@ -31,7 +31,7 @@ public class Deck {
 
     @ManyToOne
     @JoinColumn(name="user_id")
-    private AppUser userId;
+    private AppUser user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "deck")
     @JsonIgnoreProperties({"deck", "targetWord", "translation", "sentence"})
@@ -53,7 +53,7 @@ public class Deck {
         this.name = name;
         this.targetLanguage = targetLanguage;
         this.translationLanguage = translationLanguage;
-        this.userId = userId;
+        this.user = userId;
     }
 
     public Long getDeckid() {
@@ -88,15 +88,15 @@ public class Deck {
         this.translationLanguage = translationLanguage;
     }
 
-    public AppUser getUserId(){
-        return userId;
+    public AppUser getUser(){
+        return user;
     } 
-    public void  setUserId(AppUser userId){
-        this.userId = userId;
+    public void  setUser(AppUser user){
+        this.user = user;
     }
 
     public void setAppUserName(AppUser userId){
-        this.userId = userId;
+        this.user = userId;
     }
 
     public int getWordcount() {

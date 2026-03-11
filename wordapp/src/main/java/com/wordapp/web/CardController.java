@@ -28,7 +28,7 @@ public class CardController {
     }
 
     @GetMapping("/deck/{id}/addword")
-    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().userId.username == authentication.name")
+    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().user.username == authentication.name")
     public String createCard(@PathVariable("id") Long deckid, Model model, Card card){
         Deck deck = deckRepository.findById(deckid)
                                 .orElseThrow(()-> new IllegalArgumentException("Deck not found"));
@@ -41,7 +41,7 @@ public class CardController {
     }
 
     @PostMapping("/deck/{id}/addword")
-    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().userId.username == authentication.name")
+    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().user.username == authentication.name")
     public String saveCard(@PathVariable("id") Long deckid, @Valid Card card, BindingResult bindingResult, Model model){
 
         Deck deck = deckRepository.findById(deckid)

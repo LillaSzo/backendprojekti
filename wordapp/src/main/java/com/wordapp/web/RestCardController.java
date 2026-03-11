@@ -39,7 +39,7 @@ public class RestCardController {
     }
 
     @PostMapping("decks/{id}/card")
-    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().userId.username == authentication.name")
+    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().user.username == authentication.name")
     public Card postNewCard(@PathVariable("id") Long deckid, @RequestBody Card newCard){
         Deck deck = deckRepository.findById(deckid)
             .orElseThrow(() -> new RuntimeException("Deck not found"));

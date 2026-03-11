@@ -39,14 +39,14 @@ public class RestDeckController {
     }
 
     @PutMapping("decks/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().userId.username == authentication.name")
+    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().user.username == authentication.name")
     public Deck updateDeck(@PathVariable("id") Long deckid, @RequestBody Deck updatedDeck){
     deckRepository.findById(deckid);
     return deckRepository.save(updatedDeck);
     }
 
     @DeleteMapping("decks/{id}")
-    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().userId.username == authentication.name")
+    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().user.username == authentication.name")
     public Iterable<Deck> deleteDeck(@PathVariable("id") Long deckid){
         deckRepository.deleteById(deckid);
         return deckRepository.findAll();

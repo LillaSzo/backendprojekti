@@ -26,7 +26,7 @@ public class AppUser {
     @Column(name = "role", nullable = false)
     private String role;
 
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
 	@JsonIgnore
     private List<Deck> decklist;
 
