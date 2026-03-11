@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
 
@@ -27,19 +26,19 @@ public class AppUser {
     @Column(name = "role", nullable = false)
     private String role;
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
+	@JsonIgnore
+    private List<Deck> decklist;
+
 	//https://www.baeldung.com/jpa-many-to-many
 	@ManyToMany
 	@JoinTable(
 		name = "joined_decks",
 		joinColumns = @JoinColumn(name = "user_id"),
 		inverseJoinColumns = @JoinColumn(name = "deck_id"))
-	@JsonIgnoreProperties({"joinedUsers", "userId"})
+
+	@JsonIgnore
 	Set<Deck> joinedDeck;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "userId")
-	@JsonIgnoreProperties("userId")
-    private List<Deck> decklist;
-
     
     public AppUser() {
     }

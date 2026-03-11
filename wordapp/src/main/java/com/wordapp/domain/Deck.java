@@ -3,6 +3,7 @@ package com.wordapp.domain;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
@@ -30,20 +31,20 @@ public class Deck {
 
     @ManyToOne
     @JoinColumn(name="user_id")
-    @JsonIgnoreProperties({"decklist", "joinedDeck"})
     private AppUser userId;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "deck")
+    @JsonIgnoreProperties({"deck", "targetWord", "translation", "sentence"})
+    private List<Card> cardlist;
     
     @Transient
+    @JsonIgnore
     private int wordcount;
     
     //https://www.baeldung.com/jpa-many-to-many
     @ManyToMany(mappedBy = "joinedDeck")
-    @JsonIgnoreProperties({"joinedDeck", "decklist"})
+    @JsonIgnore
     Set <AppUser> joinedUsers;
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "deck")
-    @JsonIgnoreProperties("deck")
-    private List<Card> cardlist;
 
     public Deck() {
     }
