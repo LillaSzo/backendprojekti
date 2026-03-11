@@ -32,6 +32,7 @@ public class RestCardController {
     public Iterable<Card> findAllCards(){
         return cardRepository.findAll();
     }
+    
     @GetMapping("cards/{id}")
     public Optional<Card> findCardById(@PathVariable("id") Long cardid){
        return cardRepository.findById(cardid); 
@@ -51,6 +52,7 @@ public class RestCardController {
         cardRepository.findById(id);
         return cardRepository.save(updatedCard);
     }
+
     @DeleteMapping("/cards/{id}")
     public Iterable<Card> deleteCard(@PathVariable ("id") Long cardid){
         cardRepository.deleteById(cardid);

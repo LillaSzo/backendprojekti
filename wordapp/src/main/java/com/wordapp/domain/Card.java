@@ -26,7 +26,7 @@ public class Card {
 
     @ManyToOne
     @JoinColumn(name="deck_id")
-    @JsonIgnoreProperties("cardlist")
+    @JsonIgnoreProperties({"cardlist", "joinedUsers", "userId", "targetLanguage", "translationLanguage", "wordcount", "name"})
     private Deck deck;
 
     public Card(){}
