@@ -75,7 +75,7 @@ class WordappApplicationTests {
 	}
 
 	@Test
-	@WithMockUser(username = "admin")
+	@WithMockUser(authorities={"ADMIN"})
 	public void testGetMain() throws Exception {
 		this.mockMvc.perform(get("/main"))
 					.andExpect(status().isOk());
@@ -94,14 +94,14 @@ class WordappApplicationTests {
 	}
 
 	@Test
-	@WithMockUser(username = "admin")
+	@WithMockUser(authorities={"ADMIN"})
 	public void testGetEdit() throws Exception {
 		this.mockMvc.perform(get("/edit/2"))
 					.andExpect(status().isOk());
 	}
 
 	@Test
-	@WithMockUser(username = "admin")
+	@WithMockUser(authorities={"ADMIN"})
 	public void testGetAddWord() throws Exception {
 		this.mockMvc.perform(get("/deck/2/addword"))
 					.andExpect(status().isOk());
@@ -114,7 +114,7 @@ class WordappApplicationTests {
 	}
 
 	@Test
-	@WithMockUser(username = "user")
+	@WithMockUser(authorities={"ADMIN"})
 	public void testGetPractice() throws Exception {
 		this.mockMvc.perform(get("/practice/deck/1"))
 					.andExpect(status().isOk());

@@ -49,11 +49,11 @@ public class Deck {
     public Deck() {
     }
 
-    public Deck(String name, Language targetLanguage, Language translationLanguage, AppUser userId) {
+    public Deck(String name, Language targetLanguage, Language translationLanguage, AppUser user) {
         this.name = name;
         this.targetLanguage = targetLanguage;
         this.translationLanguage = translationLanguage;
-        this.user = userId;
+        this.user = user;
     }
 
     public Long getDeckid() {

@@ -10,6 +10,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.wordapp.domain.Card;
 import com.wordapp.domain.CardRepository;
+import com.wordapp.domain.Deck;
+import com.wordapp.domain.DeckRepository;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -31,6 +33,10 @@ public class RestCardControllerTest {
 
     @Autowired
     private CardRepository cardRepository;
+
+    @Autowired
+    private DeckRepository deckRepository;
+
     @Test
     public void testGetAllCards() throws Exception {
 
@@ -46,14 +52,14 @@ public class RestCardControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "admin")
+    @WithMockUser(authorities={"ADMIN"})
     public void testPostCard() throws Exception {
 
         String newCardJson = """
         {
-        "targetWord": "testi",
+        "targetWord": "postkortti",
         "translation": "test",
-        "sentence": "Post test"
+        "sentence": "Post testi"
         }
         """;
         
@@ -64,8 +70,11 @@ public class RestCardControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "admin")
+    @WithMockUser(authorities={"ADMIN"})
     public void testPutCard() throws Exception {
+
+    List <Card> cards = cardRepository.findByTargetWord("resttesti");
+    Card card = cards.get(0);
 
         String putCardJson = """
         {
@@ -78,24 +87,30 @@ public class RestCardControllerTest {
         }
         }
         """;
-    mockMvc.perform(put("/cards/3")
+    mockMvc.perform(put("/cards/" + card.getCardid())
         .contentType(MediaType.APPLICATION_JSON)
         .content(putCardJson))
         .andExpect(status().isOk());
     }
 
     @Test
-    @WithMockUser(username = "admin")
+    @WithMockUser(authorities={"ADMIN"})
     public void testDeleteCard() throws Exception {
 
-    mockMvc.perform(delete("/cards/3"))
+    Deck deck = deckRepository.findById(2L).orElseThrow();
+    Card card = new Card();
+
+    card.setTargetWord("poistaa");
+    card.setTranslation("to delete");
+    card.setSentence("Poistotestaus");
+    card.setDeck(deck);
+    cardRepository.save(card);
+
+    mockMvc.perform(delete("/cards/" + card.getCardid()))
         .andExpect(status().isOk());
 
-    List<Card> cards = cardRepository.findByTargetWord("päivitys");
-        Card card = cards.get(0);
-        cardRepository.delete(card);
-        List<Card> newCards = cardRepository.findByTargetWord("päivitys");
-        assertThat(newCards).hasSize(0);
+    List<Card> cards = cardRepository.findByTargetWord("poistaa");
+    assertThat(cards).hasSize(0);
     }
 
 

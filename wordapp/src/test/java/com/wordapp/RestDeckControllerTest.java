@@ -8,11 +8,18 @@ import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
+import com.wordapp.domain.Deck;
+import com.wordapp.domain.DeckRepository;
+
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.List;
 
 
 @SpringBootTest
@@ -21,6 +28,9 @@ public class RestDeckControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
+
+    @Autowired
+    private DeckRepository deckRepository;
 
     @Test
     public void testGetAllDecks() throws Exception {
@@ -47,7 +57,7 @@ public class RestDeckControllerTest {
             "name": "English",
             "id": 2
             },
-            "userId": {
+            "user": {
             "username": "admin",
             "role": "ADMIN",
             "id": 2
@@ -65,11 +75,15 @@ public class RestDeckControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "admin")
+    @WithMockUser(authorities={"ADMIN"})
     public void testPutDeck () throws Exception {
+
+    List<Deck> decks = deckRepository.findByName("REST Test Deck");
+    Deck deck = decks.get(0);
+
         String updatedDeckJson = """
             {
-            "name": "Update Test Deck",
+            "name": "Updated REST Test Deck",
             "targetLanguage": {
             "name": "Finnish",
             "id": 1
@@ -78,17 +92,17 @@ public class RestDeckControllerTest {
             "name": "English",
             "id": 2
             },
-            "userId": {
+            "user": {
             "username": "admin",
             "role": "ADMIN",
             "id": 2
             },
             "wordcount": 0,
             "cardlist": [],
-            "deckid": 10
+            "deckid": 3
             }
             """;
-        mockMvc.perform(put("/decks/10")
+        mockMvc.perform(put("/decks/" + deck.getDeckid())
         .contentType(MediaType.APPLICATION_JSON)
         .content(updatedDeckJson))
         .andExpect(status().isOk());
@@ -96,10 +110,17 @@ public class RestDeckControllerTest {
     }
 
     @Test
-    @WithMockUser(username = "admin")
+    @WithMockUser(authorities={"ADMIN"})
     public void testDeleteDeck () throws Exception {
+    
+    List<Deck> decks = deckRepository.findByName("Testin Test Deck");
+    Deck deck = decks.get(0);
 
-        mockMvc.perform(delete("/decks/10"))
+        mockMvc.perform(delete("/decks/" + deck.getDeckid()))
             .andExpect(status().isOk());
+    
+    List<Deck> newDecks = deckRepository.findByName("Testin Test Deck");
+    assertThat(newDecks).hasSize(0);
     }
+
 }    
