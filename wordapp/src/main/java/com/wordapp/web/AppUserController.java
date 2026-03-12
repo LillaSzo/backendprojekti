@@ -27,7 +27,12 @@ public class AppUserController {
 public String addStudent(Model model){
     model.addAttribute("signupform", new SignupForm());
     return "signup";
-    }	
+    }
+
+@GetMapping("/login")
+public String login() {
+    return "login";
+    }
 
 @PostMapping("/saveuser")
     public String save(@Valid @ModelAttribute("signupform") SignupForm signupForm, BindingResult bindingResult) {

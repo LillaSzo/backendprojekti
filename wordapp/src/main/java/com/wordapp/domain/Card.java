@@ -1,6 +1,6 @@
 package com.wordapp.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
@@ -26,7 +26,7 @@ public class Card {
 
     @ManyToOne
     @JoinColumn(name="deck_id")
-    @JsonIgnoreProperties({"cardlist", "user", "joinedUsers", "userId", "targetLanguage", "translationLanguage", "wordcount", "name"})
+    @JsonIgnore
     private Deck deck;
 
     public Card(){}

@@ -38,11 +38,6 @@ public class DeckController {
     return appUserRepository.findByUsername(username);
     }
     
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-    
     @GetMapping("/main")
     public String showDecks(Model model){
         AppUser currentUser = getCurrentUser();

@@ -3,8 +3,7 @@ package com.wordapp.domain;
 import java.util.List;
 import java.util.Set;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
@@ -34,7 +33,7 @@ public class Deck {
     private AppUser user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "deck")
-    @JsonIgnoreProperties({"deck", "targetWord", "translation", "sentence"})
+    @JsonIgnore
     private List<Card> cardlist;
     
     @Transient
