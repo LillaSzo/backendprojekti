@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.wordapp.domain.Deck;
@@ -23,6 +24,7 @@ import java.util.List;
 
 
 @SpringBootTest
+@ActiveProfiles("test")
 @AutoConfigureMockMvc(addFilters = false)
 public class RestDeckControllerTest {
 
@@ -48,7 +50,7 @@ public class RestDeckControllerTest {
     public void testPostDeck() throws Exception {
        String newDeckJson = """
             {
-            "name": "Testin Test Deck",
+            "name": "Test Post Deck",
             "targetLanguage": {
             "name": "Finnish",
             "id": 1
@@ -78,12 +80,12 @@ public class RestDeckControllerTest {
     @WithMockUser(authorities={"ADMIN"})
     public void testPutDeck () throws Exception {
 
-    List<Deck> decks = deckRepository.findByName("REST Test Deck");
+    List<Deck> decks = deckRepository.findByName("Test Post Deck");
     Deck deck = decks.get(0);
 
         String updatedDeckJson = """
             {
-            "name": "Updated REST Test Deck",
+            "name": "Updated Test Deck",
             "targetLanguage": {
             "name": "Finnish",
             "id": 1
@@ -113,13 +115,13 @@ public class RestDeckControllerTest {
     @WithMockUser(authorities={"ADMIN"})
     public void testDeleteDeck () throws Exception {
     
-    List<Deck> decks = deckRepository.findByName("Testin Test Deck");
+    List<Deck> decks = deckRepository.findByName("Updated Test Deck");
     Deck deck = decks.get(0);
 
         mockMvc.perform(delete("/decks/" + deck.getDeckid()))
             .andExpect(status().isOk());
     
-    List<Deck> newDecks = deckRepository.findByName("Testin Test Deck");
+    List<Deck> newDecks = deckRepository.findByName("Updated Test Deck");
     assertThat(newDecks).hasSize(0);
     }
 

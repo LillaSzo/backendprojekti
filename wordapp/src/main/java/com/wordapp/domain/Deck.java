@@ -33,7 +33,7 @@ public class Deck {
     private AppUser user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "deck")
-    @JsonIgnore
+    @JsonIgnoreProperties("deck")
     private List<Card> cardlist;
     
     @Transient

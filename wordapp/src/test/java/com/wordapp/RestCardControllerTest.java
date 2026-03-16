@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.webmvc.test.autoconfigure.AutoConfigureMockMvc;
 import org.springframework.http.MediaType;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.wordapp.domain.Card;
@@ -25,6 +26,7 @@ import java.util.List;
 
 
 @SpringBootTest
+@ActiveProfiles("test")
 @AutoConfigureMockMvc(addFilters = false)
 public class RestCardControllerTest {
 
@@ -63,7 +65,7 @@ public class RestCardControllerTest {
         }
         """;
         
-    mockMvc.perform(post("/decks/2/card")
+    mockMvc.perform(post("/decks/1/card")
         .contentType(MediaType.APPLICATION_JSON)
         .content(newCardJson))
         .andExpect(status().isOk());
@@ -73,17 +75,17 @@ public class RestCardControllerTest {
     @WithMockUser(authorities={"ADMIN"})
     public void testPutCard() throws Exception {
 
-    List <Card> cards = cardRepository.findByTargetWord("resttesti");
+    List <Card> cards = cardRepository.findByTargetWord("postkortti");
     Card card = cards.get(0);
 
         String putCardJson = """
         {
-        "cardid": 3,
+        "cardid": 2,
         "targetWord": "päivitys",
         "translation": "update",
         "sentence": "Put testi",
         "deck": {
-        "deckid": 2
+        "deckid": 
         }
         }
         """;
@@ -97,20 +99,14 @@ public class RestCardControllerTest {
     @WithMockUser(authorities={"ADMIN"})
     public void testDeleteCard() throws Exception {
 
-    Deck deck = deckRepository.findById(2L).orElseThrow();
-    Card card = new Card();
-
-    card.setTargetWord("poistaa");
-    card.setTranslation("to delete");
-    card.setSentence("Poistotestaus");
-    card.setDeck(deck);
-    cardRepository.save(card);
+    List<Card> cards = cardRepository.findByTargetWord("päivitys");
+    Card card = cards.get(0);
 
     mockMvc.perform(delete("/cards/" + card.getCardid()))
         .andExpect(status().isOk());
 
-    List<Card> cards = cardRepository.findByTargetWord("poistaa");
-    assertThat(cards).hasSize(0);
+    List<Card> newCards = cardRepository.findByTargetWord("poistaa");
+    assertThat(newCards).hasSize(0);
     }
 
 
