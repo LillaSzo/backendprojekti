@@ -44,8 +44,7 @@ public class CommunityDeckController {
     @PostMapping("/deck/{id}/join")
     public String joinDeck(@PathVariable ("id") Long deckid){
 
-        Deck deck = deckRepository.findById(deckid)
-                        .orElseThrow(()-> new IllegalArgumentException("Deck not found"));
+        Deck deck = deckRepository.findById(deckid).orElseThrow();
         AppUser currentUser = getCurrentUser();
         currentUser.getJoinedDeck().add(deck);
         appUserRepository.save(currentUser);

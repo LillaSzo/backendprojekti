@@ -76,8 +76,8 @@ public class DeckController {
     @GetMapping("/edit/{id}")
     @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().user.username == authentication.name")
     public String pickEdit(@PathVariable("id") Long deckid, Model model){
-        Deck deck = deckRepository.findById(deckid)
-                                .orElseThrow(()-> new IllegalArgumentException("Deck not found"));
+        
+        Deck deck = deckRepository.findById(deckid).orElseThrow();
         model.addAttribute("deck", deck);
         model.addAttribute("cards", deck.getCardlist());
         model.addAttribute("languages", languageRepository.findAll());

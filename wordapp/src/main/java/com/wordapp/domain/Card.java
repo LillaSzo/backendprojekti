@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Table(name="cards")
 public class Card {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="card_id", nullable = false, updatable = false)

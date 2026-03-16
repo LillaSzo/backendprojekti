@@ -34,7 +34,7 @@ user_id BIGSERIAL REFERENCES app_users(user_id) NOT NULL
 
 INSERT INTO decks(name, target_language_id, translation_language_id, user_id)
 VALUES
-('User Test Deck', 1, 2, 1),
+('User Deck', 1, 2, 1),
 ('Ohjelmointi', 1, 2, 2);
 
 CREATE TABLE cards(

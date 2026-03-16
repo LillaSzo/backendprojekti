@@ -26,8 +26,8 @@ public class PracticeController {
 
     @GetMapping("practice/deck/{id}")
     public String viewPractice(@PathVariable ("id") Long deckid, @RequestParam(required = false, defaultValue = "false") boolean practice, Model model){
-        Deck deck = deckRepository.findById(deckid)
-                                .orElseThrow(()-> new IllegalArgumentException("Deck not found"));
+        
+        Deck deck = deckRepository.findById(deckid).orElseThrow();
         model.addAttribute("deck", deck);
         model.addAttribute("cards", deck.getCardlist());
         model.addAttribute("practice", practice);
@@ -38,8 +38,7 @@ public class PracticeController {
     @PostMapping("/practice/deck/{deckid}/card/{cardid}/check")
     public String checkWord(@PathVariable Long deckid, @PathVariable Long cardid, @RequestParam String answer, RedirectAttributes redirectAttributes) {
  
-    Card card = cardRepository.findById(cardid)
-                            .orElseThrow(()-> new IllegalArgumentException("Card not found"));;
+    Card card = cardRepository.findById(cardid).orElseThrow();
 
     boolean correct = answer.trim().equalsIgnoreCase(card.getTargetWord().trim());
 

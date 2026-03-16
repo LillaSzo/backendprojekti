@@ -34,7 +34,8 @@ user_id BIGSERIAL REFERENCES app_users(user_id) NOT NULL
 
 INSERT INTO decks(name, target_language_id, translation_language_id, user_id)
 VALUES
-('REST Test Deck', 1, 2, 2);
+('Testin Test Deck', 1, 2, 2),
+('Testin Test Deck 2', 1, 2, 2);
 
 CREATE TABLE cards(
 card_id BIGSERIAL PRIMARY KEY,
@@ -46,7 +47,7 @@ deck_id BIGSERIAL REFERENCES decks(deck_id) NOT NULL
 
 INSERT INTO cards(target_word, translation, sentence, deck_id)
 VALUES
-('resttesti', 'resttest', 'Sanakortti testaamisen takia.', 1);
+('testi', 'test', 'Sanakortti testaamisen takia.', 1);
 
 CREATE TABLE joined_decks(
 user_id BIGSERIAL REFERENCES app_users(user_id) ON DELETE CASCADE,
@@ -56,5 +57,7 @@ deck_id BIGSERIAL REFERENCES decks(deck_id) ON DELETE CASCADE
 INSERT INTO joined_decks(user_id, deck_id)
 VALUES
 (1, 1);
+
+select * from decks
 
 

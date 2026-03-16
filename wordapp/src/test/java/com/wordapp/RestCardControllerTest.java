@@ -11,8 +11,6 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.wordapp.domain.Card;
 import com.wordapp.domain.CardRepository;
-import com.wordapp.domain.Deck;
-import com.wordapp.domain.DeckRepository;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -35,9 +33,6 @@ public class RestCardControllerTest {
 
     @Autowired
     private CardRepository cardRepository;
-
-    @Autowired
-    private DeckRepository deckRepository;
 
     @Test
     public void testGetAllCards() throws Exception {
