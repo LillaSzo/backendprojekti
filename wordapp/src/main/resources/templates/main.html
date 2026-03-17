@@ -40,7 +40,7 @@
             </tr>
         </table>
 
-    <div sec:authorize="${hasAuthority('USER')}">
+        <div sec:authorize="${hasAuthority('USER')}">
 
         <div class="d-flex justify-content-between align-items-center mb-4 mt-5">
         <h2 class="fw-bold">Community Decks</h2>
@@ -63,9 +63,37 @@
                 <td th:text="${deck.translationLanguage}"></td>
                 <td th:text="${deck.wordcount}"></td>
                 <td class="text-end"><a th:href="@{/practice/deck/{id}(id=${deck.deckid})}" class="btn btn-success">Practice</a>
+                <a th:href="@{/leave/deck/{id}(id=${deck.deckid})}" class="btn btn-danger">Leave</a></td>
             </tr>
         </table>
-    </div>
+        </div>
+
+        <div sec:authorize="${hasAuthority('ADMIN')}">
+
+        <div class="d-flex justify-content-between align-items-center mb-4 mt-5">
+        <h2 class="fw-bold">User Decks</h2></div>    
+
+        <table class="table table-hover align-middle mb-0 shadow-sm">
+            <thead class="table-light">
+            <tr>
+            <th>Name</th>
+            <th>Target Language</th>
+            <th>Translation</th>
+            <th>Word Count</th>
+            <th class="text-end">Actions</th>
+            </tr>
+            </thead>
+
+            <tr th:each = "deck : ${userDecks}">
+                <td th:text="${deck.name}"></td>
+                <td th:text="${deck.targetLanguage}"></td>
+                <td th:text="${deck.translationLanguage}"></td>
+                <td th:text="${deck.wordcount}"></td>
+                <td class ="text-end"><a th:href="@{/delete/{id}(id=${deck.deckid})}" class="btn btn-danger">Delete</a></td>
+            </tr>
+        </table>
+        </div>
+
     </div>
     </body>
     <footer th:replace="~{fragments :: footer}"></footer>

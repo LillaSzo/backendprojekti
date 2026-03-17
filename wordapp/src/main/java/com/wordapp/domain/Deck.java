@@ -42,7 +42,7 @@ public class Deck {
     private int wordcount;
     
     //https://www.baeldung.com/jpa-many-to-many
-    @ManyToMany(mappedBy = "joinedDeck")
+    @ManyToMany(mappedBy = "joinedDecks")
     @JsonIgnore
     Set <AppUser> joinedUsers;
 

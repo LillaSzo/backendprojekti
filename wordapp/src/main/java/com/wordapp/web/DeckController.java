@@ -43,7 +43,8 @@ public class DeckController {
         AppUser currentUser = getCurrentUser();
         
         model.addAttribute("decks", currentUser.getDecklist());
-        model.addAttribute("joined", currentUser.getJoinedDeck());
+        model.addAttribute("joined", currentUser.getJoinedDecks());
+        model.addAttribute("userDecks", deckRepository.findByUserRole("USER"));
 
         return "main";
     }

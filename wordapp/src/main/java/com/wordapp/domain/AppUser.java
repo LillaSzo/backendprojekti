@@ -39,7 +39,7 @@ public class AppUser {
 	)
 
 	@JsonIgnore
-	Set<Deck> joinedDeck;
+	Set<Deck> joinedDecks;
     
     public AppUser() {
     }
@@ -91,12 +91,12 @@ public class AppUser {
 		this.decklist = decklist;
 	}
 
-	public Set<Deck> getJoinedDeck() {
-		return joinedDeck;
+	public Set<Deck> getJoinedDecks() {
+		return joinedDecks;
 	}
 
-	public void setJoinedDeck(Set<Deck> joinedDeck) {
-		this.joinedDeck = joinedDeck;
+	public void setJoinedDecks(Set<Deck> joinedDecks) {
+		this.joinedDecks = joinedDecks;
 	}
 
 	

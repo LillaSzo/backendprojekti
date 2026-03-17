@@ -46,7 +46,18 @@ public class CommunityDeckController {
 
         Deck deck = deckRepository.findById(deckid).orElseThrow();
         AppUser currentUser = getCurrentUser();
-        currentUser.getJoinedDeck().add(deck);
+        currentUser.getJoinedDecks().add(deck);
+        appUserRepository.save(currentUser);
+
+        return "redirect:/main";
+    }
+
+    @GetMapping("/leave/deck/{id}")
+    public String leaveDeck(@PathVariable ("id") Long deckid){
+
+        Deck deck = deckRepository.findById(deckid).orElseThrow();
+        AppUser currentUser = getCurrentUser();
+        currentUser.getJoinedDecks().remove(deck);
         appUserRepository.save(currentUser);
 
         return "redirect:/main";
