@@ -14,7 +14,7 @@
         <a th:href="@{/practice/deck/{id}(id=${deck.deckid}, practice=true)}" class="btn btn-success">Practice</a>
         </div>    
 
-        <table class="table table-hover align-middle mb-0" style="box-shadow: 0 4px 8px rgba(0,0,0,0.2)">
+        <table class="table table-hover align-middle mb-0 shadow-sm">
         <thead class="table-light">
             <tr>
                 <th>Translation</th>
@@ -34,7 +34,7 @@
                     <button type="submit" class="btn btn-outline-success">Check</button>
                 </form>
 
-                <div th:if="${cardid == card.cardid}" th:classappend="${correct} ? 'text-success' : 'text-danger'">
+                <div th:if="${checkedCardid == card.cardid}" th:classappend="${correct} ? 'text-success' : 'text-danger'">
                     <span th:text="${message}"></span>
                 </div>
                 </td>

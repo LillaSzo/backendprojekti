@@ -25,7 +25,7 @@ public class PracticeController {
     }
 
     @GetMapping("practice/deck/{id}")
-    public String viewPractice(@PathVariable ("id") Long deckid, @RequestParam(required = false, defaultValue = "false") boolean practice, Model model){
+    public String viewPractice(@PathVariable ("id") Long deckid, @RequestParam(defaultValue = "false") boolean practice, Model model){
         
         Deck deck = deckRepository.findById(deckid).orElseThrow();
         model.addAttribute("deck", deck);
@@ -42,10 +42,15 @@ public class PracticeController {
 
     boolean correct = answer.trim().equalsIgnoreCase(card.getTargetWord().trim());
 
-    redirectAttributes.addFlashAttribute("cardid", cardid);
+    redirectAttributes.addFlashAttribute("checkedCardid", cardid);
     redirectAttributes.addFlashAttribute("correct", correct);
-    redirectAttributes.addFlashAttribute("message", correct ? "Correct!" : "Correct answer is: " + card.getTargetWord());
-    
+        
+        if(correct){
+            redirectAttributes.addFlashAttribute("message", "Correct!");
+        }else {
+            redirectAttributes.addFlashAttribute("message", "Correct answer is: " + card.getTargetWord());
+        }
+        
     return "redirect:/practice/deck/" + deckid + "?practice=true";
     }
 

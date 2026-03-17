@@ -35,7 +35,8 @@ public class AppUser {
 	@JoinTable(
 		name = "joined_decks",
 		joinColumns = @JoinColumn(name = "user_id"),
-		inverseJoinColumns = @JoinColumn(name = "deck_id"))
+		inverseJoinColumns = @JoinColumn(name = "deck_id")
+	)
 
 	@JsonIgnore
 	Set<Deck> joinedDeck;
