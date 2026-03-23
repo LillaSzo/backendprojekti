@@ -89,8 +89,11 @@ public class DeckController {
     @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().user.username == authentication.name")
     public String editDeck(@PathVariable("id") Long deckid, @Valid Deck deck, BindingResult bindingresult, Model model){
         
+        Deck decks = deckRepository.findById(deckid).orElseThrow();
+
         if(bindingresult.hasErrors()){
             model.addAttribute("languages", languageRepository.findAll());
+            model.addAttribute("cards", decks.getCardlist());
             return "editdeck";
         }
         deck.setUser(getCurrentUser());

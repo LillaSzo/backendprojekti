@@ -48,7 +48,14 @@ deck_id BIGSERIAL REFERENCES decks(deck_id) NOT NULL
 INSERT INTO cards(target_word, translation, sentence, deck_id)
 VALUES
 ('kissa', 'cat', 'Heikki on paras kissa maailmassa', 1),
-('nuolinotaatio', 'arrownotation', 'Funktiota määritellään nuolinotaatiolla', 2);
+('nuolinotaatio', 'arrownotation', 'Funktio määritellään nuolinotaatiolla', 2),
+('kehys', 'framework', 'Spring-kehystä on käytetty backend-sovelluksen rakentamiseen', 2),
+('perintä', 'inheritance', 'Kissa-luokka perii ominaisuutensa Eläin-luokalta', 2),
+('rajapinta', 'interface', 'Rajapinta määrittelee metodit, mutta ei niiden toteutusta', 2),
+('riippuvuus', 'dependency', 'Kontrolleri saa tietokantayhteyden riippuvuuden kautta', 2),
+('vakio', 'constant', 'Vakion arvo ei muutu ohjelman suorituksen aikana', 2),
+('salaus', 'encryption', 'Käyttäjän salasana tallennetaan tietokantaan salattuna', 2)
+;
 
 CREATE TABLE joined_decks(
 user_id BIGSERIAL REFERENCES app_users(user_id) ON DELETE CASCADE,
@@ -59,4 +66,5 @@ INSERT INTO joined_decks(user_id, deck_id)
 VALUES
 (1, 2);
 
+select * from cards
 
