@@ -7,7 +7,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.wordapp.domain.Card;
 import com.wordapp.domain.CardRepository;
@@ -55,8 +54,9 @@ public class CardController {
         return "redirect:/main";
     }
     
-    @GetMapping("/deletecard")
-    public String deleteCard(@RequestParam Long deckid, @RequestParam Long cardid){
+    @GetMapping("/deletecard/{deckid}/{cardid}")
+    @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().user.username == authentication.name")
+    public String deleteCard(@PathVariable Long deckid, @PathVariable Long cardid){
         cardRepository.deleteById(cardid);
         return "redirect:/edit/" + deckid;
     }

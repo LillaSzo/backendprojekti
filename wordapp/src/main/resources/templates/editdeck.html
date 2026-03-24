@@ -62,7 +62,7 @@
                 <td th:text = "${card.targetWord}"></td>
                 <td th:text = "${card.translation}"></td>
                 <td th:text = "${card.sentence}"></td>
-                <td><a th:href = "@{/deletecard(deckid=${deck.deckid},cardid=${card.cardid})}" class="btn btn-outline-danger">Delete</a></td>
+                <td><a th:href = "@{/deletecard/{deckid}/{cardid}(deckid=${deck.deckid},cardid=${card.cardid})}" class="btn btn-outline-danger">Delete</a></td>
             </tr>
     </table>
     </div>
