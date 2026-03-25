@@ -119,4 +119,12 @@ class WordappApplicationTests {
 		this.mockMvc.perform(get("/practice/deck/1"))
 					.andExpect(status().isOk());
 	}
+
+	@Test
+	@WithMockUser(authorities={"ADMIN"})
+	public void testGetUserlist() throws Exception {
+		this.mockMvc.perform(get("/userlist"))
+					.andExpect(status().isOk());
+
+	}
 }

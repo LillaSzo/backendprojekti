@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Users</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head> 
+    <header th:replace="~{fragments :: header}"></header>
+    <body>
+    <div class="container mt-5">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold">Users</h2>
+        </div>    
+
+        <table class="table table-hover align-middle mb-0 shadow-sm">
+            <thead class="table-light">
+            <tr>
+            <th>Name</th>
+            <th>Decks</th>
+            <th>Joined Decks</th>
+            <th>Actions</th>
+            </tr>
+            </thead>
+
+            <tr th:each = "user : ${users}">
+                <td th:text="${user.username}"></td>
+                <td th:text="${user.decklist.size()}"></td>
+                <td th:text="${user.joinedDecks.size()}"></td>
+                <td><a th:href="@{/delete/user/{id}(id=${user.id})}" class="btn btn-danger">Delete</a></td>
+            </tr>
+        </table>

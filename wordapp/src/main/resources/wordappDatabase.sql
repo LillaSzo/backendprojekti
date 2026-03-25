@@ -65,6 +65,3 @@ deck_id BIGSERIAL REFERENCES decks(deck_id) ON DELETE CASCADE
 INSERT INTO joined_decks(user_id, deck_id)
 VALUES
 (1, 2);
-
-select * from cards
-

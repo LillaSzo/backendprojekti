@@ -3,6 +3,7 @@ package com.wordapp.web;
 import java.util.Optional;
 
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,12 +28,18 @@ public class RestAppUserController {
     }
 
     @GetMapping("/users/{id}")
-    public Optional<AppUser> findUserById(@PathVariable ("id") Long id){
+    public Optional<AppUser> findUserById(@PathVariable("id") Long id){
         return appUserRepository.findById(id);
     }
 
     @GetMapping("/users/role")
     public AppUser findByRole(@RequestParam String role){
         return appUserRepository.findByRole(role);
+    }
+
+    @DeleteMapping("/users/{id}")
+    public Iterable<AppUser> deleteById(@PathVariable("id") Long id){
+        appUserRepository.deleteById(id);
+        return appUserRepository.findAll();
     }
 }

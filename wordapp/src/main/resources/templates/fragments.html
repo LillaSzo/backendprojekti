@@ -22,6 +22,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/community"><b>Community Decks</b></a>
                         </li>
+                        <li class="nav-item">
+                            <a sec:authorize="${hasAuthority('ADMIN')}" class="nav-link" href="/userlist"><b>Users</b></a>
+                        </li>
                     </ul>
                     <div class="d-flex">
                         <form th:action="@{/logout}" method="post">

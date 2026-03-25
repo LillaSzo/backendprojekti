@@ -58,6 +58,3 @@ INSERT INTO joined_decks(user_id, deck_id)
 VALUES
 (1, 1);
 
-select * from decks
-
-
