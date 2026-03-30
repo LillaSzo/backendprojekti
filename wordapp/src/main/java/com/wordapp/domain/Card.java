@@ -15,11 +15,11 @@ public class Card {
     private Long cardid;
 
     @Size(min=2, max=20)
-    @Column(name="target_word")
+    @Column(name="target_word", length = 20)
     private String targetWord;
 
     @Size(min=2, max=20)
-    @Column(name="translation")
+    @Column(name="translation", length = 20)
     private String translation;
     
     @Column(name="sentence")

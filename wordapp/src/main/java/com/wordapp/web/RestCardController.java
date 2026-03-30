@@ -14,6 +14,9 @@ import com.wordapp.domain.Card;
 import com.wordapp.domain.CardRepository;
 import com.wordapp.domain.Deck;
 import com.wordapp.domain.DeckRepository;
+
+import jakarta.validation.Valid;
+
 import org.springframework.web.bind.annotation.PutMapping;
 
 
@@ -40,15 +43,14 @@ public class RestCardController {
 
     @PostMapping("decks/{id}/card")
     @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().user.username == authentication.name")
-    public Card postNewCard(@PathVariable("id") Long deckid, @RequestBody Card newCard){
-        Deck deck = deckRepository.findById(deckid)
-            .orElseThrow(() -> new RuntimeException("Deck not found"));
+    public Card postNewCard(@PathVariable("id") Long deckid,@Valid @RequestBody Card newCard){
+        Deck deck = deckRepository.findById(deckid).orElseThrow();
         newCard.setDeck(deck);
         return cardRepository.save(newCard);
     }
 
     @PutMapping("cards/{id}")
-    public Card updateCard(@PathVariable Long id, @RequestBody Card updatedCard) {
+    public Card updateCard(@PathVariable Long id,@Valid @RequestBody Card updatedCard) {
         cardRepository.findById(id);
         return cardRepository.save(updatedCard);
     }

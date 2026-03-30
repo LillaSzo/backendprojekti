@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wordapp.domain.Deck;
 import com.wordapp.domain.DeckRepository;
 
+import jakarta.validation.Valid;
+
 @RestController
 public class RestDeckController {
 
@@ -29,7 +31,7 @@ public class RestDeckController {
     }
 
     @PostMapping("/deck")
-    public Deck postNewDeck(@RequestBody Deck newDeck){
+    public Deck postNewDeck(@Valid @RequestBody Deck newDeck){
         return deckRepository.save(newDeck);
     }
 
@@ -40,7 +42,7 @@ public class RestDeckController {
 
     @PutMapping("decks/{id}")
     @PreAuthorize("hasAuthority('ADMIN') or @deckRepository.findById(#deckid).get().user.username == authentication.name")
-    public Deck updateDeck(@PathVariable("id") Long deckid, @RequestBody Deck updatedDeck){
+    public Deck updateDeck(@PathVariable("id") Long deckid,@Valid @RequestBody Deck updatedDeck){
     deckRepository.findById(deckid);
     return deckRepository.save(updatedDeck);
     }

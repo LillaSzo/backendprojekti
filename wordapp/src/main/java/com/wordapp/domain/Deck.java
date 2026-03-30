@@ -18,7 +18,7 @@ public class Deck {
     private Long deckid;
 
     @Size(min=2, max=30)
-    @Column(name = "name")
+    @Column(name = "name", length = 30)
     private String name; 
 
     @ManyToOne
