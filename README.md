@@ -27,7 +27,7 @@ Features:
 
 Screenshots:
 Login:
-<img width="508" height="557" alt="login" src="https://github.com/user-attachments/assets/e17e37fe-2d1c-43d7-b503-3cc7a1edd252" />
+<img width="508" height="557" alt="login" src="https://github.com/user-attachments/assets/9093ab1f-5759-4c23-bbf9-cf73681c7fd8" />
 Main for User:
 <img width="1263" height="533" alt="front" src="https://github.com/user-attachments/assets/b910f9ca-cab5-429d-9afb-86004a98102b" />
 Practice Off:
