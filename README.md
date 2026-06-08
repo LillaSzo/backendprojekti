@@ -26,17 +26,17 @@ Features:
 - Users can practice vocabulary using word cards
 
 Screenshots:
+
 Login:
-
 <br>
-
-<img width="508" height="557" alt="login" src="[https://github.com/user-attachments/assets/9093ab1f-5759-4c23-bbf9-cf73681c7fd8](https://github.com/user-attachments/assets/9093ab1f-5759-4c23-bbf9-cf73681c7fd8)" />
+<img width="914" height="745" alt="login" src="https://github.com/user-attachments/assets/ccdf7081-8897-458d-964d-91eec44978ae" />
 Main for User:
 <img width="1263" height="533" alt="front" src="https://github.com/user-attachments/assets/b910f9ca-cab5-429d-9afb-86004a98102b" />
 Practice Off:
 <img width="1078" height="482" alt="practiceoff" src="https://github.com/user-attachments/assets/9b114ea7-7b3b-4057-ab04-d07847847e46" />
 Practice On:
-<img width="1069" height="576" alt="practiceon" src="https://github.com/user-attachments/assets/0fada7a7-ea5c-4b61-8fc1-28f014dba85e" />
+<img width="1087" height="593" alt="practiceon" src="https://github.com/user-attachments/assets/92e5c43c-6464-4f8b-a20b-853a4f5893ca" />
+
 
 
 
